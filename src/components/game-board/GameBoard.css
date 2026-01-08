@@ -1,4 +1,6 @@
 .gameBoard {
     background-color:purple;
     color: aqua;
+    display: grid;
+    height: 100vh;
 }
