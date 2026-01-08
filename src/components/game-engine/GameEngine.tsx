@@ -1,5 +1,5 @@
 import { useState, type JSX } from "react";
-import { type SceneType, SceneDict } from "../../lib/types";
+import { SceneDict } from "../../lib/definitions";
 import MainMenu from "../scenes/main-menu/MainMenu";
 import TriviaGame from "../scenes/trivia-game/TriviaGame";
 
@@ -20,9 +20,7 @@ export default function GameEngine() {
       currentSceneComponent = <TriviaGame />;
       break;
     default:
-      currentSceneComponent = (
-        <MainMenu handlePlayButtonClick={handleSceneChange} />
-      );
+      currentSceneComponent = <MainMenu handlePlayButtonClick={handleSceneChange} />;
       break;
   }
 

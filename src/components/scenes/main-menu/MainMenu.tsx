@@ -1,5 +1,4 @@
-import type { MouseEventHandler } from "react"
-import { SceneDict } from "../../../lib/types"
+import { SceneDict } from "../../../lib/definitions"
 import "./MainMenu.css"
 
 type MainMenuProps = {
