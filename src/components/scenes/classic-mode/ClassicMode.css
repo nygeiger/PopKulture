@@ -1,0 +1,8 @@
+.classicGame {
+    width: 150vh; /* why is it being weird???? Not taking up entire width of page */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

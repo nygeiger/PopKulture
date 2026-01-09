@@ -1,8 +1,8 @@
-export const SceneDict = { MAIN_MENU: "mainMenuScene", TRIVIA_GAME: "triviaGameScene" } as const
+export const SceneDict = { MAIN_MENU: "mainMenuScene", DEV_GAME: "devGameScene", CLASSIC_GAME: "classicGameScene", CHALLENGE_GAME: "challengeGameScene" } as const
 
 export type SceneType = typeof SceneDict[keyof typeof SceneDict];
 
-export type Questions = {
+export type Question = {
     id: string,
     Category: string,
     Question: string,
@@ -15,5 +15,5 @@ export type Questions = {
 
 export type QuestionsResponseJSON = {
     debugInfo: string | undefined,
-    data: Questions[]
+    data: Question[]
 }

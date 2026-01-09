@@ -1,0 +1,25 @@
+.questionCard {
+    width: 40%;
+    height: 40%;
+    border-style: solid;
+    border-radius: 8px;
+    background-color: cadetblue;
+}
+
+.questionSection {
+    position: relative;
+    top: 20px;
+    left: 25%;
+    margin-bottom: 30px;
+}
+
+.answerSection {
+    position: relative;
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.answerElement {
+    text-align: center;
+}

@@ -66,3 +66,18 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+/* body {
+  margin: 0;
+  /* display: flex; */
+  /* place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+} */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Important for the body to provide a defined height */
+    overflow: auto; /* Hide the main page scrollbar */
+}

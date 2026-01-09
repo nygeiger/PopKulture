@@ -1,7 +1,8 @@
 import { useState, type JSX } from "react";
 import { SceneDict } from "../../lib/definitions";
 import MainMenu from "../scenes/main-menu/MainMenu";
-import TriviaGame from "../scenes/trivia-game/TriviaGame";
+import DevGame from "../scenes/dev-game/DevGame";
+import ClassicGame from "../scenes/classic-mode/ClassicMode";
 
 
 export default function GameEngine() {
@@ -16,8 +17,14 @@ export default function GameEngine() {
   };
 
   switch (currentSceneName) {
-    case SceneDict.TRIVIA_GAME:
-      currentSceneComponent = <TriviaGame />;
+    case SceneDict.DEV_GAME:
+      currentSceneComponent = <DevGame handleMenuButtonClick={handleSceneChange} />;
+      break;
+    case SceneDict.CLASSIC_GAME:
+      currentSceneComponent = <ClassicGame handleMenuButtonClick={handleSceneChange} />
+      break;
+    case SceneDict.CHALLENGE_GAME:
+      currentSceneComponent = <DevGame handleMenuButtonClick={handleSceneChange} />
       break;
     default:
       currentSceneComponent = <MainMenu handlePlayButtonClick={handleSceneChange} />;
