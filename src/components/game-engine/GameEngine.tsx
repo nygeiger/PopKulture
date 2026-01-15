@@ -3,6 +3,7 @@ import { SceneDict } from "../../lib/definitions";
 import MainMenu from "../scenes/main-menu/MainMenu";
 import DevGame from "../scenes/dev-game/DevGame";
 import ClassicGame from "../scenes/classic-mode/ClassicMode";
+import "./GameEngine.css"
 
 
 export default function GameEngine() {

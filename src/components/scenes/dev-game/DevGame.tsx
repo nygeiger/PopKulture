@@ -10,6 +10,7 @@ type DevGameProps = {
 
 export default function DevGame(props: DevGameProps) {
     const [questionsList, setQuestionsList] = useState<Question[]>([])
+
     const testQuestionsRequest = async () => {
         try {
         const getQuestResponse: QuestionsResponseJSON = await getQuestions();
