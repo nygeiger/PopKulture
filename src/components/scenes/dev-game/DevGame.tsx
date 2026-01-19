@@ -5,7 +5,7 @@ import { LOCAL_SERVER_PORT } from "../../../lib/utils";
 import GameBoard from "../../game-board/GameBoard";
 
 type DevGameProps = {
-    handleMenuButtonClick: (newSceneName: string) => void
+    handleChangeSceneButtonClick: (newSceneName: string) => void
 }
 
 export default function DevGame(props: DevGameProps) {
@@ -33,7 +33,7 @@ export default function DevGame(props: DevGameProps) {
         <div className="devGame">
             <button className="testQRespButton" onClick={() => testQuestionsRequest()}>Test Question Response !!!</button>
             <button className="testQRespButton" onClick={() => getHelloFromBE()}>Hello Server :)</button>
-            <button className="testQRespButton" onClick={() => props.handleMenuButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
+            <button className="testQRespButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
             <GameBoard gameboardText="labubu" questions={questionsList}/>
         </div>
     )

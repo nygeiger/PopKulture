@@ -6,7 +6,7 @@ import { getRandomNum } from "../../../lib/utils";
 import "./ClassicMode.css";
 
 type ClassicGameProps = {
-    handleMenuButtonClick: (newSceneName: string) => void
+    handleChangeSceneButtonClick: (newSceneName: string) => void
 }
 
 export default function ClassicGame(props: ClassicGameProps) {
@@ -45,7 +45,7 @@ export default function ClassicGame(props: ClassicGameProps) {
 
     return (
         <div className="classicGame">
-            <button className="testQRespButton" onClick={() => props.handleMenuButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
+            <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
             <div className="classicGameHeader">Classic Mode</div>
             {questionsList[0] &&  <QuestionCard question={questionsList[currentQuestionIndex]} nextQuestion={handleGetNewQuestion} />}
         </div>

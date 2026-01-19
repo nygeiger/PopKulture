@@ -4,6 +4,7 @@ import MainMenu from "../scenes/main-menu/MainMenu";
 import DevGame from "../scenes/dev-game/DevGame";
 import ClassicGame from "../scenes/classic-mode/ClassicMode";
 import "./GameEngine.css"
+import ClassicModeMenu from "../scenes/classic-mode-menu/ClassicModeMenu";
 
 
 export default function GameEngine() {
@@ -19,18 +20,20 @@ export default function GameEngine() {
 
   switch (currentSceneName) {
     case SceneDict.DEV_GAME:
-      currentSceneComponent = <DevGame handleMenuButtonClick={handleSceneChange} />;
+      currentSceneComponent = <DevGame handleChangeSceneButtonClick={handleSceneChange} />;
       break;
     case SceneDict.CLASSIC_GAME:
-      currentSceneComponent = <ClassicGame handleMenuButtonClick={handleSceneChange} />
+      currentSceneComponent = <ClassicGame handleChangeSceneButtonClick={handleSceneChange} />
       break;
     case SceneDict.CHALLENGE_GAME:
-      currentSceneComponent = <DevGame handleMenuButtonClick={handleSceneChange} />
+      currentSceneComponent = <DevGame handleChangeSceneButtonClick={handleSceneChange} />
+      break;
+    case SceneDict.CHALLENGE_GAME_MENU:
+      currentSceneComponent = <ClassicModeMenu handleChangeSceneButtonClick={handleSceneChange} />
       break;
     default:
-      currentSceneComponent = <MainMenu handlePlayButtonClick={handleSceneChange} />;
+      currentSceneComponent = <MainMenu handleChangeSceneButtonClick={handleSceneChange} />;
       break;
   }
-
   return <div className="gameEngine">{currentSceneComponent}</div>;
 }

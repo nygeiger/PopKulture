@@ -9,9 +9,9 @@
 
 .questionSection {
     position: relative;
-    display: block;
+    display: flex;
     top: 20px;
-    left: 30%;
+    justify-content: center;
     margin-bottom: 30px;
 }
 

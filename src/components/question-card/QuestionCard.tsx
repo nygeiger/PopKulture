@@ -2,11 +2,6 @@ import { useState } from "react";
 import type { Question } from "../../lib/definitions";
 import "./QuestionCard.css";
 
-type QuestionCardProps = {
-  question: Question;
-  nextQuestion: () => void;
-};
-
 type CorrectAnswerType = "AnswerA" | "AnswerB" | "AnswerC" | "AnswerD";
 
 function letterToIndex(answerLetter: CorrectAnswerType): number {
@@ -21,6 +16,11 @@ function letterToIndex(answerLetter: CorrectAnswerType): number {
       return 3;
   }
 }
+
+type QuestionCardProps = {
+  question: Question;
+  nextQuestion: () => void;
+};
 
 export default function QuestionCard(props: QuestionCardProps) {
   const [correctAnserSelected, setCorrectAnserSelected] = useState(false);
@@ -52,17 +52,11 @@ export default function QuestionCard(props: QuestionCardProps) {
   const getNextQuestion = () => {
     setCorrectAnserSelected(false); //TODO: Is this the correct way to "reload" component or should we get a completely new instance
     props.nextQuestion();
-
   }
 
-  const tempVari = props.question.AnswerA;
   return (
     <div className="questionCard">
       <span className="questionSection">{props.question.Question}</span>
-        {/* <button className="answerElement answerA">answerA</button>
-        <button className="answerElement answerB">answerB</button>
-        <button className="answerElement answerC">answerC</button>
-        <button className="answerElement answerD">answerD</button> */}
         {correctAnserSelected ? (
           <div className="correctAnswerDisplay">
           <span>{`${answers[correctAnswer]} Correct Answer !`}</span>
@@ -71,7 +65,8 @@ export default function QuestionCard(props: QuestionCardProps) {
         ) : (<div className="answerSection">
           {answers.map((e, i) => {
             const elClassName = correctAnswer === i ? "answerElement" : "answerElement correct";
-            return (<button className={elClassName} key={i} onClick={() => handleAnswerClick(i)}>{`${e}${correctAnswer === i ? "correct answer" : ""}`}</button>);
+            // return (<button className={elClassName} key={i} onClick={() => handleAnswerClick(i)}>{`${e}${correctAnswer === i ? "correct answer" : ""}`}</button>);
+            return (<button className={elClassName} key={i} onClick={() => handleAnswerClick(i)}>{`${e.replaceAll("*","")}`}</button>);
           })}
         </div>)}
     </div>

@@ -8,6 +8,7 @@ export function getDefaultQuestions() {
     return Array(10).map((_, i) => `Question ${i + 1}`);
 }
 
+//TODO: Look to caching
 export async function getQuestions() {
     const local_proxy_url = `http://localhost:${LOCAL_SERVER_PORT}/api`;
     const resp = await fetch(local_proxy_url);
