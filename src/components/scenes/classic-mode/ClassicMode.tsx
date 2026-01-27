@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { getQuestions } from "../../../lib/actions";
-import { SceneDict, type Question, type QuestionsResponseJSON } from "../../../lib/definitions";
+import { SceneDict, type Question, type QuestionsResponseJSON, type Team } from "../../../lib/definitions";
 import QuestionCard from "../../question-card/QuestionCard";
 import { getRandomNum } from "../../../lib/utils";
 import "./ClassicMode.css";
 
-type ClassicGameProps = {
+export type ClassicGameProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void
+    teams: Team[]
 }
 
 export default function ClassicGame(props: ClassicGameProps) {
@@ -15,14 +16,14 @@ export default function ClassicGame(props: ClassicGameProps) {
 
     const retrieveQuestions = async () => {
         try {
-        const getQuestResponse: QuestionsResponseJSON = await getQuestions(); //TODO: DOn't have a fetch for all questions
-        const randomIndex = Math.floor(getRandomNum(0, getQuestResponse.data.length))
-        console.log("randomIndex: " + randomIndex)
-        console.log("chosen questions: \n " + JSON.stringify(getQuestResponse.data[randomIndex]))
-        // setQuestionsList( getQuestResponse.data.slice(4))
-        // setQuestionsList( Array(1).fill(getQuestResponse.data[randomIndex]))
-        setQuestionsList( getQuestResponse.data ) // TODO: Currently setting the array to all questions in database (no bueno)
-        setCurrentQuestionIndex(randomIndex)
+            const getQuestResponse: QuestionsResponseJSON = await getQuestions(); //TODO: DOn't have a fetch for all questions
+            const randomIndex = Math.floor(getRandomNum(0, getQuestResponse.data.length))
+            console.log("randomIndex: " + randomIndex)
+            console.log("chosen questions: \n " + JSON.stringify(getQuestResponse.data[randomIndex]))
+            // setQuestionsList( getQuestResponse.data.slice(4))
+            // setQuestionsList( Array(1).fill(getQuestResponse.data[randomIndex]))
+            setQuestionsList(getQuestResponse.data) // TODO: Currently setting the array to all questions in database (no bueno)
+            setCurrentQuestionIndex(randomIndex)
         } catch (e) {
             console.error(e);
             return {}
@@ -30,7 +31,7 @@ export default function ClassicGame(props: ClassicGameProps) {
     }
 
     const handleGetNewQuestion = () => {
-        const randomIndex = Math.floor(getRandomNum(0, questionsList.length)); //TODO: take magic number out
+        const randomIndex = Math.floor(getRandomNum(0, questionsList.length));
         setCurrentQuestionIndex(randomIndex);
 
     }
@@ -39,15 +40,15 @@ export default function ClassicGame(props: ClassicGameProps) {
 
     useEffect((() => {
         retrieveQuestions()
-    }),[])
+    }), [])
 
 
 
     return (
         <div className="classicGame">
             <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
-            <div className="classicGameHeader">Classic Mode</div>
-            {questionsList[0] &&  <QuestionCard question={questionsList[currentQuestionIndex]} nextQuestion={handleGetNewQuestion} />}
+            <div className="classicGameHeader">Classic Mode with {props.teams.length} teams</div>
+            {questionsList[0] && <QuestionCard question={questionsList[currentQuestionIndex]} nextQuestion={handleGetNewQuestion} />}
         </div>
     )
 }

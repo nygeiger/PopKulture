@@ -23,3 +23,8 @@ export type QuestionsResponseJSON = {
   debugInfo: string | undefined;
   data: Question[];
 };
+
+export type Team = {
+    name: string,
+    points: number
+}
