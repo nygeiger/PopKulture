@@ -4,3 +4,7 @@ export const QUESTIONS_URL: string = "https://script.google.com/macros/s/AKfycbw
 export const getRandomNum = (min: number, max: number): number => {
   return Math.random() * (max - min) + min;
 };
+
+export const getRandomInt = (min: number, max: number): number => {
+  return Math.floor(Math.random() * (max - min) + min);
+};
