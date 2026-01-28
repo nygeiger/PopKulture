@@ -25,12 +25,6 @@ export default function GameEngine() {
     }
   }
 
-  // const handleGetNewQuestion = () => {
-  //   const randomIndex = Math.floor(getRandomNum(0, questionsList.length));
-  //   setCurrentQuestionIndex(randomIndex);
-
-  // }
-
   useEffect((() => {
     retrieveQuestions()
   }), [])
@@ -47,7 +41,7 @@ export default function GameEngine() {
       case SceneDict.CLASSIC_GAME:
         return { ...baseProps, teams, questions: questionsList } as ClassicGameProps// ClassicGameProps;
       case SceneDict.CHALLENGE_GAME_MENU:
-        return { ...baseProps, setTeams } // ClassicGameMenuProps;
+        return { ...baseProps, setTeams } as ClassicGameMenuProps;
       default:
         return baseProps;
     }
