@@ -1,16 +1,39 @@
-import { useState, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import { SceneDict } from "../../lib/definitions";
-import type { Team } from "../../lib/definitions";
+import type { Question, QuestionsResponseJSON, Team } from "../../lib/definitions";
 import MainMenu from "../scenes/main-menu/MainMenu";
 import DevGame from "../scenes/dev-game/DevGame";
 import ClassicGame, { type ClassicGameProps } from "../scenes/classic-mode/ClassicMode";
 import "./GameEngine.css"
 import ClassicModeMenu, { type ClassicGameMenuProps } from "../scenes/classic-mode-menu/ClassicModeMenu";
+import { getQuestions } from "../../lib/actions";
 
 export default function GameEngine() {
   // TODO: figure out how to enforce currentSceneName coming from SceneDict (should i?)
   const [currentSceneName, setCurrentSceneName] = useState<string>(SceneDict.MAIN_MENU);
+
+  const [questionsList, setQuestionsList] = useState<Question[]>([])
   const [teams, setTeams] = useState<Team[]>([]);
+
+  const retrieveQuestions = async () => {
+    try {
+      const getQuestResponse: QuestionsResponseJSON = await getQuestions();
+      setQuestionsList(getQuestResponse.data) // TODO: Currently setting the array to all questions in database (no bueno?)
+    } catch (e) {
+      console.error(e);
+      return {}
+    }
+  }
+
+  // const handleGetNewQuestion = () => {
+  //   const randomIndex = Math.floor(getRandomNum(0, questionsList.length));
+  //   setCurrentQuestionIndex(randomIndex);
+
+  // }
+
+  useEffect((() => {
+    retrieveQuestions()
+  }), [])
 
   const handleSceneChange = (newSceneName: string) => {
     setCurrentSceneName(newSceneName);
@@ -22,7 +45,7 @@ export default function GameEngine() {
 
     switch (sceneName) {
       case SceneDict.CLASSIC_GAME:
-        return { ...baseProps, teams } // ClassicGameProps;
+        return { ...baseProps, teams, questions: questionsList } as ClassicGameProps// ClassicGameProps;
       case SceneDict.CHALLENGE_GAME_MENU:
         return { ...baseProps, setTeams } // ClassicGameMenuProps;
       default:

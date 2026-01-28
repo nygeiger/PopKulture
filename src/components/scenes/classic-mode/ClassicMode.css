@@ -1,5 +1,5 @@
 .classicGame {
-    width: 150vh; /* why is it being weird???? Not taking up entire width of page */
+    width: 150vh;
     height: 100vh;
     display: flex;
     flex-direction: column;
