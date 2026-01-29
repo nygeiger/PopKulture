@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import cors from "cors"
 import serverless from "serverless-http";
-import { QUESTIONS_URL } from "../../src/lib/utils.ts"
+// import { QUESTIONS_URL } from "../../src/lib/utils.ts"
 
 const api = express();
 
