@@ -25,6 +25,18 @@ app.use("/api", async (_, res) => {
     }
 })
 
+app.use("/get-all-questions", async (_, res) => {
+    // const reqURL = `${QUESTIONS_URL}${req.url}` // will probably need for potential post requests
+    const reqURL = `${QUESTIONS_URL}`
+    try {
+        const apiResponse = await fetch(reqURL);
+        const data = await apiResponse.text(); // should i go ahead and json it?
+        res.send(data);
+    } catch (error) {
+        res.status(500).send("Error fetching data from the Questions API.");
+    }
+})
+
 // app.use("/hello-server", async (req, res) => {
 app.use("/hello-server", async (_, res) => {
     // console.log("Recieved Hello <3\n \t sending back hello")

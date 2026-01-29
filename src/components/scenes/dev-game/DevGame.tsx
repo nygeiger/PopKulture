@@ -48,12 +48,18 @@ export default function DevGame(props: DevGameProps) {
         alert(serverRespText)
     }
 
+    const canReadENVVariable = () => {
+
+        alert(import.meta.env.NETLIFY)
+    }
+
     return (
         <div className="devGame">
             <button className="testQRespButton" onClick={() => testQuestionsRequest()}>Test Question Response !!!</button>
             <button className="testQRespButton" onClick={() => getHelloFromBE()}>Hello Server :)</button>
              <button className="testQRespButton" onClick={() => getHelloFromBE2()}>Hello Server 2 :)</button>
               <button className="testQRespButton" onClick={() => getHelloFromBE3()}>Hello Server 3 :)</button>
+              <button className="testQRespButton" onClick={() => canReadENVVariable()}>Is NETLIFY Env</button>
             <button className="testQRespButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
             <GameBoard gameboardText="labubu" questions={questionsList}/>
         </div>
