@@ -41,7 +41,7 @@ export default function DevGame(props: DevGameProps) {
 
     const getHelloFromBE3 = async () => {
         // const serverResp = await fetch( `http://localhost:${LOCAL_SERVER_PORT}/hello-server`);
-        const serverResp = await fetch( `/api`);
+        const serverResp = await fetch( `/.netlify/functions/api/hello-backend`);
         const serverRespText = await serverResp.text()
         console.log("Hello Server Response Obj: " + serverResp)
         console.log(serverRespText)

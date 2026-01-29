@@ -13,7 +13,7 @@ const router = Router();
 //         res.status(500).send("Error fetching data from the Questions API. \n" + error);
 //     }
 // });
-router.get("/", (req, res) => {
+router.get("/hello-backend", (req, res) => {
     try {
         res.send("Hello Front End :)")
     } catch (error) {
