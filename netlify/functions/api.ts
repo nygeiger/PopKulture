@@ -1,19 +1,25 @@
 import express, { Router } from "express";
-import cors from "cors"
+// import cors from "cors"
 import serverless from "serverless-http";
 // import { QUESTIONS_URL } from "../../src/lib/utils.ts"
 
-const api = express();
+// const api = express();
 
 const router = Router();
-router.get("/hello-server", (req, res) => res.send("Hello Front End :)"));
+router.get("/hello-server", (req, res) => {
+    try {
+        res.send("Hello Front End :)")
+    } catch (error) {
+        res.status(500).send("Error fetching data from the Questions API. \n" + error);
+    }
+});
 
 // api.use("/api/", router);
 // api.use("'/.netlify/functions/api'", router);
 
 const app = express()
-app.use("'/.netlify/functions/api'", router);
-app.use(cors())
+app.use("/.netlify/functions/api", router);
+// app.use(cors())
 
 // New route to handle requests to jservice api
 // use middleware to wrap requests in appropriate cors authorization

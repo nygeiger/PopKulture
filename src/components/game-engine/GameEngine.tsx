@@ -27,17 +27,30 @@ export default function GameEngine() {
     } catch (e) {
       console.error(e);
     }
+  }
 
+  const retrieveQuestions2 = async () => {
     try {
       console.log("Raw fetch")
       console.log((await fetch(QUESTIONS_URL)).text())
-    } catch(e) {
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const retrieveQuestions3 = async () => {
+    try {
+      console.log("newGetQuestions")
+      console.log(await newGetQuestions())
+    } catch (e) {
       console.error(e)
     }
   }
 
   useEffect((() => {
-    retrieveQuestions()
+    if(questionsList.length > 0) retrieveQuestions() // prevent this from running for testing
+    retrieveQuestions3()
+    retrieveQuestions2()
   }), [])
 
   const handleSceneChange = (newSceneName: string) => {
