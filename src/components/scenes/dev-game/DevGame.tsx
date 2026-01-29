@@ -30,10 +30,30 @@ export default function DevGame(props: DevGameProps) {
         alert(serverRespText)
     }
 
+    const getHelloFromBE2 = async () => {
+        // const serverResp = await fetch( `http://localhost:${LOCAL_SERVER_PORT}/hello-server`);
+        const serverResp = await fetch( `/.netlify/functions/api`);
+        const serverRespText = await serverResp.text()
+        console.log("Hello Server Response Obj: " + serverResp)
+        console.log(serverRespText)
+        alert(serverRespText)
+    }
+
+    const getHelloFromBE3 = async () => {
+        // const serverResp = await fetch( `http://localhost:${LOCAL_SERVER_PORT}/hello-server`);
+        const serverResp = await fetch( `/api`);
+        const serverRespText = await serverResp.text()
+        console.log("Hello Server Response Obj: " + serverResp)
+        console.log(serverRespText)
+        alert(serverRespText)
+    }
+
     return (
         <div className="devGame">
             <button className="testQRespButton" onClick={() => testQuestionsRequest()}>Test Question Response !!!</button>
             <button className="testQRespButton" onClick={() => getHelloFromBE()}>Hello Server :)</button>
+             <button className="testQRespButton" onClick={() => getHelloFromBE2()}>Hello Server 2 :)</button>
+              <button className="testQRespButton" onClick={() => getHelloFromBE3()}>Hello Server 3 :)</button>
             <button className="testQRespButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
             <GameBoard gameboardText="labubu" questions={questionsList}/>
         </div>

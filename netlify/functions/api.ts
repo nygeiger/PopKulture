@@ -6,7 +6,14 @@ import serverless from "serverless-http";
 // const api = express();
 
 const router = Router();
-router.get("/hello-server", (req, res) => {
+// router.get("/hello-server", (req, res) => {
+//     try {
+//         res.send("Hello Front End :)")
+//     } catch (error) {
+//         res.status(500).send("Error fetching data from the Questions API. \n" + error);
+//     }
+// });
+router.get("/", (req, res) => {
     try {
         res.send("Hello Front End :)")
     } catch (error) {
