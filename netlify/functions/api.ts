@@ -1,8 +1,14 @@
-import express from "express"
+import express, { Router } from "express";
 import cors from "cors"
-import { LOCAL_SERVER_PORT, QUESTIONS_URL } from "../lib/utils.ts"
+import serverless from "serverless-http";
+import { QUESTIONS_URL } from "../../src/lib/utils.ts"
 
-// TODO: Is node (as seen in the script in package.json) the recommended way to start a backend for typescript react
+const api = express();
+
+const router = Router();
+router.get("/hello", (req, res) => res.send("Hello World!"));
+
+api.use("/api/", router);
 
 const app = express()
 app.use(cors())
@@ -38,12 +44,5 @@ app.use((err: any, res: any) => {
     }
 });
 
-// const PORT = 6000;
-// app.listen(PORT, () => {
-//     console.log(`Server is running on http://localhost:${PORT}`);
-// })
-app.listen(LOCAL_SERVER_PORT, () => {
-    console.log(`Server is running on http://localhost:${LOCAL_SERVER_PORT}`);
-})
-
-// export default app
+// export const handler = serverless(api);
+export const handler = serverless(app);

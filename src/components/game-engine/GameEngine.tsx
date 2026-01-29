@@ -6,8 +6,9 @@ import DevGame from "../scenes/dev-game/DevGame";
 import ClassicGame, { type ClassicGameProps } from "../scenes/classic-mode/ClassicMode";
 import "./GameEngine.css"
 import ClassicModeMenu, { type ClassicGameMenuProps } from "../scenes/classic-mode-menu/ClassicModeMenu";
-import { getQuestions } from "../../lib/actions";
+import { getQuestions, newGetQuestions } from "../../lib/actions";
 import WinnerScene, { type WinnerSceneProps } from "../scenes/winner-scene/WinnerScene";
+import { QUESTIONS_URL } from "../../lib/utils";
 
 export default function GameEngine() {
   // TODO: figure out how to enforce currentSceneName coming from SceneDict (should i?)
@@ -20,9 +21,18 @@ export default function GameEngine() {
   const retrieveQuestions = async () => {
     try {
       const getQuestResponse: QuestionsResponseJSON = await getQuestions();
+      console.log(await newGetQuestions());
+      console.log("Finished fetching questions")
       setQuestionsList(getQuestResponse.data) // TODO: Currently setting the array to all questions in database (no bueno?)
     } catch (e) {
       console.error(e);
+    }
+
+    try {
+      console.log("Raw fetch")
+      console.log((await fetch(QUESTIONS_URL)).text())
+    } catch(e) {
+      console.error(e)
     }
   }
 

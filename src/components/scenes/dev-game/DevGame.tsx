@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getQuestions } from "../../../lib/actions";
 import { SceneDict, type Question, type QuestionsResponseJSON } from "../../../lib/definitions";
-import { LOCAL_SERVER_PORT } from "../../../lib/utils";
+// import { LOCAL_SERVER_PORT } from "../../../lib/utils";
 import GameBoard from "../../game-board/GameBoard";
 
 type DevGameProps = {
@@ -22,7 +22,8 @@ export default function DevGame(props: DevGameProps) {
     }
 
     const getHelloFromBE = async () => {
-        const serverResp = await fetch( `http://localhost:${LOCAL_SERVER_PORT}/hello-server`);
+        // const serverResp = await fetch( `http://localhost:${LOCAL_SERVER_PORT}/hello-server`);
+        const serverResp = await fetch( `/hello-server`);
         const serverRespText = await serverResp.text()
         console.log("Hello Server Response Obj: " + serverResp)
         console.log(serverRespText)

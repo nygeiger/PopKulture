@@ -14,3 +14,9 @@ export async function getQuestions() {
     const resp = await fetch(local_proxy_url);
     return resp.json();
 }
+
+export async function newGetQuestions() {
+    const local_proxy_url = `/api`;
+    const resp = await fetch(local_proxy_url);
+    return resp.json();
+}
