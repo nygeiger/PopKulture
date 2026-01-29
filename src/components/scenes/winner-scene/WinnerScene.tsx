@@ -7,7 +7,6 @@ export type WinnerSceneProps = {
 }
 
 export default function WinnerScene(props: WinnerSceneProps){
-
     return (
         <div className="winnerScene">
             <div style={{paddingBottom: "10px"}}>{`Congratulations ${props.winningTeam.name}!!`}</div>

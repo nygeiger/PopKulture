@@ -11,7 +11,8 @@ app.use(cors())
 // use middleware to wrap requests in appropriate cors authorization
 // app.use("/api", async (req, res) => {
 
-app.use("/api", async (req, res) => {
+// app.use("/api", async (req, res) => {
+app.use("/api", async (_, res) => {
     // const reqURL = `${QUESTIONS_URL}${req.url}` // will probably need for potential post requests
     const reqURL = `${QUESTIONS_URL}`
     console.log(reqURL);
@@ -26,12 +27,14 @@ app.use("/api", async (req, res) => {
     console.log("made it through without catching error ><")
 })
 
-app.use("/hello-server", async (req, res) => {
+// app.use("/hello-server", async (req, res) => {
+app.use("/hello-server", async (_, res) => {
     console.log("Recieved Hello <3\n \t sending back hello")
     res.send("Hello Front End :)")
 })
 
-app.use((err: any, req: any, res: any, nex: any) => {
+// app.use((err: any, req: any, res: any, nex: any) => {
+app.use((err: any, res: any) => {
     console.error("Global error handler caught:", err.stack); // Log the full stack trace
     if (!res.headersSent) { // Check if a response has already been sent
         res.status(500).send('Something broke!');

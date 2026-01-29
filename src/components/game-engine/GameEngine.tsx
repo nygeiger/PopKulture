@@ -23,7 +23,6 @@ export default function GameEngine() {
       setQuestionsList(getQuestResponse.data) // TODO: Currently setting the array to all questions in database (no bueno?)
     } catch (e) {
       console.error(e);
-      return {}
     }
   }
 
