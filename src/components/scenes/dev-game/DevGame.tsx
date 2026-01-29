@@ -50,7 +50,7 @@ export default function DevGame(props: DevGameProps) {
 
     const canReadENVVariable = () => {
 
-        alert(import.meta.env.NETLIFY)
+        alert(import.meta.env.VITE_IS_NETLIFY)
     }
 
     return (
