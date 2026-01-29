@@ -13,7 +13,7 @@ export default function GameBoard(props: GameboardProps) {
   if (props.questions) {
     questions.push(...props.questions.map((e) => e.Question));
   }
-  console.log("Default Questions -->\n" + questions.toString());
+  // console.log("Default Questions -->\n" + questions.toString());
   return (
     <div className="gameBoard">
       {questions.map((e, i) => (

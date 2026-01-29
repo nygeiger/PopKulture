@@ -40,16 +40,10 @@ export default function QuestionCard(props: QuestionCardProps) {
     props.question.CorrectAnswer as CorrectAnswerType
   );
 
-  console.log(
-    "Correct answer is " +
-    props.question.CorrectAnswer +
-    " aka " +
-    correctAnswer
-  );
+  // console.log("Correct answer is " + props.question.CorrectAnswer + " aka " + correctAnswer);
 
   const handleAnswerClick = (selectedAnswer: number, e: BaseSyntheticEvent) => {
     const answerChoiceButton: HTMLButtonElement = e.target;
-    console.log(e);
     if (selectedAnswer === correctAnswer) {
       props.addTeamPoints(answerAward)
       setCorrectAnserSelected(true);

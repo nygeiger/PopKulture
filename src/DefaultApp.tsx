@@ -2,7 +2,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './DefaultApp.css'
-import { fetchQuestions } from './lib/data'
 
 function DefaultApp() {
   const [count, setCount] = useState(0)
@@ -21,9 +20,6 @@ function DefaultApp() {
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
-        <button onClick={async() => fetchQuestions()}>
-          Fetch Questions
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
