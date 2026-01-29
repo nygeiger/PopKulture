@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { SceneDict, type Question, type Team } from "../../../lib/definitions";
 import QuestionCard from "../../question-card/QuestionCard";
-import { getRandomInt } from "../../../lib/utils";
+import { getRandomInt, POINTS_TO_WIN } from "../../../lib/utils";
 import "./ClassicMode.css";
 
 export type ClassicGameProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void;
+    setWinningTeam: (teamIndex: number) => void;
     questions: Question[];
     teams: Team[];
 }
@@ -20,6 +21,10 @@ export default function ClassicGame(props: ClassicGameProps) {
 
     const handleGetNewQuestion = () => {
         currentTeam.points += additionalPoints;
+        if (currentTeam.points >= POINTS_TO_WIN) {
+            props.setWinningTeam(currentTeamIndex)
+            props.handleChangeSceneButtonClick(SceneDict.WINNER_SCENE)
+        }
         setAdditionalPoints(0);
         setCurrentQuestionIndex(getRandomInt(0, props.questions.length));
     }
@@ -44,9 +49,9 @@ export default function ClassicGame(props: ClassicGameProps) {
             <div className="classicGameHeader">Classic Mode</div>
             {props.questions[0] ? <QuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleGetNewQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} /> : <span>...Loading Question :)</span>}
             <div className="teams">
-                <div className="currentTeam"><div>{currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
-                <div>{props.teams.map((e, i) => {
-                    return i === currentTeamIndex ? <></> : (<div className="team" key={e.name}><div>{isSoloGame ? "Your Score" : e.name}</div><div>{e.points}</div></div>)
+                <div className="currentTeam"><div>{isSoloGame ? "Your Score" : currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
+                <div>{isSoloGame || props.teams.map((e, i) => {
+                    return i === currentTeamIndex ? "" : (<div className="team" key={e.name}><div>{isSoloGame ? "Your Score" : e.name}</div><div>{e.points}</div></div>)
                 })}
                 </div>
             </div>

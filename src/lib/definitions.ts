@@ -4,6 +4,7 @@ export const SceneDict = {
   CLASSIC_GAME: "classicGameScene",
   CHALLENGE_GAME: "challengeGameScene",
   CHALLENGE_GAME_MENU: "challengeGameSceneMenu",
+  WINNER_SCENE: "winnerScene",
 } as const;
 
 export type SceneType = (typeof SceneDict)[keyof typeof SceneDict];

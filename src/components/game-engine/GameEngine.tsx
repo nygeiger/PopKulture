@@ -7,6 +7,7 @@ import ClassicGame, { type ClassicGameProps } from "../scenes/classic-mode/Class
 import "./GameEngine.css"
 import ClassicModeMenu, { type ClassicGameMenuProps } from "../scenes/classic-mode-menu/ClassicModeMenu";
 import { getQuestions } from "../../lib/actions";
+import WinnerScene, { type WinnerSceneProps } from "../scenes/winner-scene/WinnerScene";
 
 export default function GameEngine() {
   // TODO: figure out how to enforce currentSceneName coming from SceneDict (should i?)
@@ -14,6 +15,7 @@ export default function GameEngine() {
 
   const [questionsList, setQuestionsList] = useState<Question[]>([])
   const [teams, setTeams] = useState<Team[]>([]);
+  const [winningTeamIndex, setWinningTeamIndex] = useState(0);
 
   const retrieveQuestions = async () => {
     try {
@@ -39,9 +41,11 @@ export default function GameEngine() {
 
     switch (sceneName) {
       case SceneDict.CLASSIC_GAME:
-        return { ...baseProps, teams, questions: questionsList } as ClassicGameProps// ClassicGameProps;
+        return { ...baseProps, setWinningTeam: setWinningTeamIndex, teams, questions: questionsList } as ClassicGameProps// ClassicGameProps;
       case SceneDict.CHALLENGE_GAME_MENU:
         return { ...baseProps, setTeams } as ClassicGameMenuProps;
+      case SceneDict.WINNER_SCENE:
+        return { ...baseProps, winningTeam: teams[winningTeamIndex] } as WinnerSceneProps;
       default:
         return baseProps;
     }
@@ -52,6 +56,7 @@ export default function GameEngine() {
     [SceneDict.CLASSIC_GAME]: <ClassicGame {...(getSceneProps(SceneDict.CLASSIC_GAME) as ClassicGameProps)} />,
     [SceneDict.CHALLENGE_GAME]: <DevGame {...getSceneProps(SceneDict.CHALLENGE_GAME)} />,
     [SceneDict.CHALLENGE_GAME_MENU]: <ClassicModeMenu {...(getSceneProps(SceneDict.CHALLENGE_GAME_MENU) as ClassicGameMenuProps)} />,
+    [SceneDict.WINNER_SCENE]: <WinnerScene {...(getSceneProps(SceneDict.WINNER_SCENE) as WinnerSceneProps)} />,
   };
 
   const currentSceneComponent = sceneComponentMap[currentSceneName] ||
