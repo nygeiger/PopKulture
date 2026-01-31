@@ -1,5 +1,7 @@
 # Pop Kulture
 
+>Project Still In Progress !
+
 A trivia app that tests your knowledge on decades worth of pop culture
 
 Do you know more than those around you? Maybe even the world
