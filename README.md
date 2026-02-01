@@ -12,7 +12,7 @@ Do you know more than those around you? Maybe even the world
 Play solo or with teams and test your trivia knowledge. See how many points you can get!
 
 ### Challenge
-So you really know your stuff? See how ling you can go without getting any wrong! See how you stack up against the world
+So you really know your stuff? See how long you can go without getting any wrong. Or race against time and see how far you can rack up the score. See how you stack up against the world
 
 
 # Bio
