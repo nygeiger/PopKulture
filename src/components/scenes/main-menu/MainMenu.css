@@ -1,4 +1,8 @@
 .mainMenu {
+    /* background-color: rgb(36, 68, 143); */
+    /* background-color: rgb(213, 116, 35); */
+    /* background-color: rgb(169, 86, 17); */
+    /* background-color: rgb(63, 90, 153); */
     background-color: blueviolet;
     display: flex;
     height: 100vh;

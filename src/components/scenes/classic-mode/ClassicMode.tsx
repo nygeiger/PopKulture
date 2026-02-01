@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { SceneDict, type Question, type Team } from "../../../lib/definitions";
-import QuestionCard from "../../question-card/QuestionCard";
 import { getRandomInt, POINTS_TO_WIN } from "../../../lib/utils";
 import "./ClassicMode.css";
+import ClassicQuestionCard from "../../question-card/ClassicQuestionCard";
 
 export type ClassicGameProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void;
@@ -19,7 +19,7 @@ export default function ClassicGame(props: ClassicGameProps) {
     const isSoloGame = props.teams.length === 1;
     const currentTeam = props.teams[currentTeamIndex];
 
-    const handleGetNewQuestion = () => {
+    const handleNextQuestion = () => {
         currentTeam.points += additionalPoints;
         if (currentTeam.points >= POINTS_TO_WIN) {
             props.setWinningTeam(currentTeamIndex)
@@ -47,7 +47,8 @@ export default function ClassicGame(props: ClassicGameProps) {
         <div className="classicGame">
             <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
             <div className="classicGameHeader">Classic Mode</div>
-            {props.questions[0] ? <QuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleGetNewQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} /> : <span>...Loading Question :)</span>}
+            {/* {props.questions[0] ? <QuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} /> : <span>...Loading Question :)</span>} */}
+            {props.questions[0] ? <ClassicQuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} /> : <span>...Loading Question :)</span>}
             <div className="teams">
                 <div className="currentTeam"><div>{isSoloGame ? "Your Score" : currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
                 <div>{isSoloGame || props.teams.map((e, i) => {
