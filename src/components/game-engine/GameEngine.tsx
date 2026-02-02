@@ -8,14 +8,22 @@ import "./GameEngine.css"
 import ClassicModeMenu, { type ClassicGameMenuProps } from "../scenes/classic-mode-menu/ClassicModeMenu";
 import { getQuestions } from "../../lib/actions";
 import WinnerScene, { type WinnerSceneProps } from "../scenes/winner-scene/WinnerScene";
+import ChallengeMode, { type ChallengeModeProps } from "../scenes/challenge-mode/ChallengeMode";
+import ChallengeOverScene, { type ChallengeOverProps } from "../scenes/challenge-over-scene/ChallengeOver";
 
 export default function GameEngine() {
   // TODO: figure out how to enforce currentSceneName coming from SceneDict (should i?)
   const [currentSceneName, setCurrentSceneName] = useState<string>(SceneDict.MAIN_MENU);
 
+  // For all game modes
   const [questionsList, setQuestionsList] = useState<Question[]>([])
+
+  // For Classic Mode
   const [teams, setTeams] = useState<Team[]>([]);
   const [winningTeamIndex, setWinningTeamIndex] = useState(0);
+
+  // For Challenge Mode
+  const [challengeScore, setChallengeScore] = useState(0);
 
   const retrieveQuestions = async () => {
     try {
@@ -37,14 +45,22 @@ export default function GameEngine() {
   // Factory function that builds props based on scene type
   const getSceneProps = (sceneName: string) => {
     const baseProps = { handleChangeSceneButtonClick: handleSceneChange };
-
     switch (sceneName) {
       case SceneDict.CLASSIC_GAME:
-        return { ...baseProps, setWinningTeam: setWinningTeamIndex, teams, questions: questionsList } as ClassicGameProps// ClassicGameProps;
-      case SceneDict.CHALLENGE_GAME_MENU:
-        return { ...baseProps, setTeams } as ClassicGameMenuProps;
+        const cgProps: ClassicGameProps = { ...baseProps, setWinningTeam: setWinningTeamIndex, teams, questions: questionsList };
+        return cgProps
+      case SceneDict.CLASSIC_GAME_MENU:
+        const cgmProps: ClassicGameMenuProps = { ...baseProps, setTeams };
+        return cgmProps
+        case SceneDict.CHALLENGE_GAME:
+          const chgProps: ChallengeModeProps = { ...baseProps, questions: questionsList, setChallengeScore: setChallengeScore };
+        return chgProps;
+        case SceneDict.CHALLENGE_OVER:
+          const chgoProps: ChallengeOverProps = { ...baseProps, points: challengeScore };
+        return chgoProps;
       case SceneDict.WINNER_SCENE:
-        return { ...baseProps, winningTeam: teams[winningTeamIndex] } as WinnerSceneProps;
+        const wsProps: WinnerSceneProps = { ...baseProps, winningTeam: teams[winningTeamIndex] };
+        return  wsProps;
       default:
         return baseProps;
     }
@@ -53,9 +69,10 @@ export default function GameEngine() {
   const sceneComponentMap: Record<string, JSX.Element> = {
     [SceneDict.DEV_GAME]: <DevGame {...getSceneProps(SceneDict.DEV_GAME)} />,
     [SceneDict.CLASSIC_GAME]: <ClassicGame {...(getSceneProps(SceneDict.CLASSIC_GAME) as ClassicGameProps)} />,
-    [SceneDict.CHALLENGE_GAME]: <DevGame {...getSceneProps(SceneDict.CHALLENGE_GAME)} />,
-    [SceneDict.CHALLENGE_GAME_MENU]: <ClassicModeMenu {...(getSceneProps(SceneDict.CHALLENGE_GAME_MENU) as ClassicGameMenuProps)} />,
+    [SceneDict.CHALLENGE_GAME]: <ChallengeMode {...getSceneProps(SceneDict.CHALLENGE_GAME) as ChallengeModeProps}/>,
+    [SceneDict.CLASSIC_GAME_MENU]: <ClassicModeMenu {...(getSceneProps(SceneDict.CLASSIC_GAME_MENU) as ClassicGameMenuProps)} />,
     [SceneDict.WINNER_SCENE]: <WinnerScene {...(getSceneProps(SceneDict.WINNER_SCENE) as WinnerSceneProps)} />,
+    [SceneDict.CHALLENGE_OVER]: <ChallengeOverScene {...getSceneProps(SceneDict.CHALLENGE_OVER) as ChallengeOverProps} />
   };
 
   const currentSceneComponent = sceneComponentMap[currentSceneName] ||

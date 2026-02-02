@@ -1,6 +1,5 @@
 .questionCard {
-    width: 40%;
-    height: 40%;
+    width: 100%;
     border-style: solid;
     border-radius: 8px;
     background-color: cadetblue;
@@ -13,6 +12,8 @@
     top: 20px;
     justify-content: center;
     margin-bottom: 30px;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
 .answerSection {
@@ -20,10 +21,12 @@
     padding-top: 50px;
     display: grid;
     grid-template-columns: 50% 50%;
+    margin-bottom: 25px;
 }
 
 .answerElement {
     text-align: center;
+    height: 3rem;
 }
 
 .incorrect {
@@ -35,10 +38,15 @@
     display: grid;
     grid-template-columns: auto;
     justify-content: center;
+    margin-bottom: 15px;
 }
 
 .qCardEarnedPoints {
     text-align: center;
     font-weight: bold;
     padding-bottom: 15px;
+}
+
+.newQuesButton {
+    margin-top: 10px;
 }

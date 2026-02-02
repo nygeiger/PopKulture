@@ -7,6 +7,7 @@ function App() {
   // ?: Add leaderboard?
 
   // ?: theming? check here for color scheming --> https://www.yahoo.com/news/why-traditional-black-history-month-222436126.html
+  // ?------  color scheme tool --> https://paletton.com/#uid=73i0u0kqLqMgfyilasJsIlbyfgg
 
   // TODO: Design question by category fetching.
   // TODO----   Most likely configure database api to take in parameter and return questions by category

@@ -1,4 +1,9 @@
-.classicGame {
+/* .challengeMode {
+    text-align: center;
+} */
+
+.challengeMode {
+    /* width: 150vh; */
     height: 100vh;
     /* background-color: rgb(10, 101, 101); */
     display: flex;
@@ -15,24 +20,14 @@
     justify-items: center;
 }
 
-.teams {
-    text-align: center;
-    padding-left: 10px;
-    justify-self: left;
-}
-
-.currentTeam {
-    font-size: larger;
-    font-weight: bold;
-    padding-bottom: 30px;
-}
-
 .currentScore {
     font-size: larger;
     font-weight: bold;
     text-align: center;
+    max-width: fit-content;
 }
 
-.team {
-    padding-bottom: 15px;
+.score {
+    padding-left: 10px;
+    justify-self: left;
 }
