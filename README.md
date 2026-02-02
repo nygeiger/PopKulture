@@ -24,4 +24,4 @@ In this stack theres the Front-end (vite, Typescript, React), a simple Backend s
 
 During this project I've learned a lot about cors and backend logic pertaining to http-request. I also reacclimated myself with React and its best practices.
 
-Hope you enjoy!
+Try it out [Here](https://pop-kulture.netlify.app/). Hope you enjoy!
