@@ -12,3 +12,22 @@
     justify-content: center;
     /* overflow: hidden; */
 }
+
+.gameSection {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+}
+
+.currentScore {
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+    max-width: fit-content;
+}
+
+.score {
+    padding-left: 10px;
+    justify-self: left;
+}
