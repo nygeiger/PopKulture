@@ -2,17 +2,17 @@ import { useState, type BaseSyntheticEvent } from "react";
 import type { Question } from "../../lib/definitions";
 import "./QuestionCard.css";
 
-type CorrectAnswerType = "AnswerA" | "AnswerB" | "AnswerC" | "AnswerD";
+type CorrectAnswerType = "Answer A" | "Answer B" | "Answer C" | "Answer D";
 
 function letterToIndex(answerLetter: CorrectAnswerType): number {
   switch (answerLetter) {
-    case "AnswerA":
+    case "Answer A":
       return 0;
-    case "AnswerB":
+    case "Answer B":
       return 1;
-    case "AnswerC":
+    case "Answer C":
       return 2;
-    case "AnswerD":
+    case "Answer D":
       return 3;
   }
 }
@@ -43,7 +43,7 @@ export default function QuestionCard(props: QuestionCardProps) {
     props.question.CorrectAnswer as CorrectAnswerType
   );
 
-  // console.log("Correct answer is " + props.question.CorrectAnswer + " aka " + correctAnswer);
+  console.log("Correct answer is " + props.question.CorrectAnswer + " aka " + correctAnswer);
 
   const handleAnswerClick = (isCorrectAnswer: boolean, e: BaseSyntheticEvent) => {
     const answerChoiceButton: HTMLButtonElement = e.target;
