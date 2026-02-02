@@ -8,6 +8,7 @@ export type ChallengeModeProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void;
     setChallengeScore: (score: number) => void
     questions: Question[];
+    visitedQuestions: Set<string>;
 };
 
 export default function ChallengeMode(props: ChallengeModeProps) {
@@ -18,6 +19,7 @@ export default function ChallengeMode(props: ChallengeModeProps) {
 
     useEffect(() => {
         props.setChallengeScore(0)
+        props.visitedQuestions.clear()
     }, [])
 
     useEffect(() => {
@@ -29,10 +31,31 @@ export default function ChallengeMode(props: ChallengeModeProps) {
         }
     }, [secondsRemaining])
 
+    function getNextQuestInd(): number {
+        if (props.visitedQuestions.size === props.questions.length) {
+            props.visitedQuestions.clear() // ?: Put in useEffect
+        }
+
+        let newQuestionIndex;
+
+        // TODO: Should be fine for now. Find more efficient process for when there are more questions
+        while (!newQuestionIndex) {
+            const newIndex = getRandomInt(0, props.questions.length)
+
+            if (!props.visitedQuestions.has(props.questions[newIndex].id)) {
+                newQuestionIndex = newIndex
+            }
+        }
+        return newQuestionIndex;
+    }
+
     const handleNextQuestion = () => {
         setAdditionalPoints(0)
         setCurrentScore(currentScore + additionalPoints)
-        setCurrentQuestionIndex(getRandomInt(0, props.questions.length));
+
+        let nextQuestInd = getRandomInt(0, props.questions.length);
+        if (props.visitedQuestions.has(props.questions[nextQuestInd].id))
+        setCurrentQuestionIndex(getNextQuestInd());
     }
 
     const addPoints = (addPoints: number) => {
@@ -48,7 +71,6 @@ export default function ChallengeMode(props: ChallengeModeProps) {
             Challenge Mode
             <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
             <p>{`Seconds left: ${secondsRemaining}`}</p>
-            {/* {props.questions[0] ? <QuestionCard {...questionCardProps} /> : <span>...Loading Question :)</span>} */}
             <div className="gameSection">
                 <div className="score">
                     <div className="currentScore"><div>{"Your Score"}</div><div>{additionalPoints ? <>{currentScore}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentScore}</div></div>

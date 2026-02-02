@@ -17,6 +17,7 @@ export default function GameEngine() {
 
   // For all game modes
   const [questionsList, setQuestionsList] = useState<Question[]>([])
+  const visitedQuestions = new Set<string>()
 
   // For Classic Mode
   const [teams, setTeams] = useState<Team[]>([]);
@@ -47,13 +48,13 @@ export default function GameEngine() {
     const baseProps = { handleChangeSceneButtonClick: handleSceneChange };
     switch (sceneName) {
       case SceneDict.CLASSIC_GAME:
-        const cgProps: ClassicGameProps = { ...baseProps, setWinningTeam: setWinningTeamIndex, teams, questions: questionsList };
+        const cgProps: ClassicGameProps = { ...baseProps, setWinningTeam: setWinningTeamIndex, teams, questions: questionsList, visitedQuestions };
         return cgProps
       case SceneDict.CLASSIC_GAME_MENU:
         const cgmProps: ClassicGameMenuProps = { ...baseProps, setTeams };
         return cgmProps
         case SceneDict.CHALLENGE_GAME:
-          const chgProps: ChallengeModeProps = { ...baseProps, questions: questionsList, setChallengeScore: setChallengeScore };
+          const chgProps: ChallengeModeProps = { ...baseProps, questions: questionsList, setChallengeScore: setChallengeScore, visitedQuestions };
         return chgProps;
         case SceneDict.CHALLENGE_OVER:
           const chgoProps: ChallengeOverProps = { ...baseProps, points: challengeScore };

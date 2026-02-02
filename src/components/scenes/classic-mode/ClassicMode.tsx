@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SceneDict, type Question, type Team } from "../../../lib/definitions";
 import { getRandomInt, POINTS_TO_WIN } from "../../../lib/utils";
 import "./ClassicMode.css";
@@ -9,6 +9,7 @@ export type ClassicGameProps = {
     setWinningTeam: (teamIndex: number) => void;
     questions: Question[];
     teams: Team[];
+    visitedQuestions: Set<string>;
 }
 
 export default function ClassicGame(props: ClassicGameProps) {
@@ -19,15 +20,10 @@ export default function ClassicGame(props: ClassicGameProps) {
     const isSoloGame = props.teams.length === 1;
     const currentTeam = props.teams[currentTeamIndex];
 
-    const handleNextQuestion = () => {
-        currentTeam.points += additionalPoints;
-        if (currentTeam.points >= POINTS_TO_WIN) {
-            props.setWinningTeam(currentTeamIndex)
-            props.handleChangeSceneButtonClick(SceneDict.WINNER_SCENE)
-        }
-        setAdditionalPoints(0);
-        setCurrentQuestionIndex(getRandomInt(0, props.questions.length));
-    }
+
+    useEffect(() => {
+        props.visitedQuestions.clear();
+    }, [])
 
     const addTeamPoints = (addPoints: number) => {
         setAdditionalPoints(addPoints)
@@ -41,13 +37,40 @@ export default function ClassicGame(props: ClassicGameProps) {
         }
     }
 
+    function getNextQuestInd(): number {
+        if (props.visitedQuestions.size === props.questions.length) {
+            props.visitedQuestions.clear() // ?: Put in useEffect
+        }
+
+        let newQuestionIndex;
+
+        // TODO: Should be fine for now. Find more efficient process for when there are more questions
+        while (!newQuestionIndex) {
+            const newIndex = getRandomInt(0, props.questions.length)
+
+            if (!props.visitedQuestions.has(props.questions[newIndex].id)) {
+                newQuestionIndex = newIndex
+            }
+        }
+        return newQuestionIndex;
+    }
+
+    const handleNextQuestion = () => {
+        currentTeam.points += additionalPoints;
+        if (currentTeam.points >= POINTS_TO_WIN) {
+            props.setWinningTeam(currentTeamIndex)
+            props.handleChangeSceneButtonClick(SceneDict.WINNER_SCENE)
+        }
+        setAdditionalPoints(0);
+       setCurrentQuestionIndex(getNextQuestInd());
+    }
+
     // TODO: Add suspense and skeleton to question card
     // ?: Create new component for teams? HTML may be difficult to read
     return (
         <div className="classicGame">
             <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
             <div className="classicGameHeader">Classic Mode</div>
-            {/* {props.questions[0] ? <QuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} /> : <span>...Loading Question :)</span>} */}
             <div className="gameSection">
                 <div className="teams">
                     <div className="currentTeam"><div>{isSoloGame ? "Your Score" : currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
