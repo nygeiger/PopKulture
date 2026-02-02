@@ -8,17 +8,29 @@
     /* overflow: hidden; */
 }
 
+.gameSection {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+}
+
 .teams {
-    position: absolute;
-    left: 0px;
-    width: 10rem;
     text-align: center;
+    padding-left: 10px;
+    justify-self: left;
 }
 
 .currentTeam {
     font-size: larger;
     font-weight: bold;
     padding-bottom: 30px;
+}
+
+.currentScore {
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
 }
 
 .team {

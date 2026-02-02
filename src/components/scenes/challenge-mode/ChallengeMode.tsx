@@ -40,7 +40,6 @@ export default function ChallengeMode(props: ChallengeModeProps) {
         setAdditionalPoints(addPoints)
     }
 
-    // const questionCardProps: QuestionCardProps = { question: props.questions[currentQuestionIndex], nextQuestion: handleNextQuestion }
     const challengeQuestionCardProps: ChallengeQuestionCardProps = { question: props.questions[currentQuestionIndex], addPoints, nextQuestion: handleNextQuestion, }
 
     // TODO: extract Side Labels into it's on component
