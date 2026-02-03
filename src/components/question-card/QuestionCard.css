@@ -2,6 +2,7 @@
     width: 100%;
     border-style: solid;
     border-radius: 8px;
+    border-width: 2px;
     background-color: cadetblue;
     align-items: center;
 }
@@ -18,20 +19,35 @@
 
 .answerSection {
     position: relative;
-    padding-top: 50px;
+    padding-top: 20px;
     display: grid;
-    grid-template-columns: 50% 50%;
-    margin-bottom: 25px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+    justify-items: center;
 }
 
 .answerElement {
     text-align: center;
-    height: 3rem;
+    cursor: pointer;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    height: 5rem;
+    width: 90%;
+    min-width: 5rem;
+    transition: all 0.2s;
 }
 
+/* .answerElement:not(.incorrect):hover {
+    background-color: #F39C12;
+    color: white;
+    border-color: #F39C12;
+} */
+
 .incorrect {
-    text-align: center;
     background-color: rgb(163, 5, 5);
+    font-weight: 900;
+    color: black;
 }
 
 .correctAnswerDisplay {

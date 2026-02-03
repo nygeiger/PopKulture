@@ -2,3 +2,14 @@
     color: goldenrod;
     padding-bottom: 50px; /* TODO: remove this line to make this more "global? */
 }
+button {
+    cursor: pointer;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+}
+
+button:not(.noHover):hover {
+    background-color: #F39C12;
+    color: white;
+    border-color: #F39C12;
+}

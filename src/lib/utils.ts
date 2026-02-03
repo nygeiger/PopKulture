@@ -7,6 +7,8 @@ export const QUESTIONS_INITIAL_POINTS = 1000
 export const WRONG_ANSWER_PENALTY = 200
 export const POINTS_TO_WIN = 10000
 
+export const CHALLENGE_MODE_TIME_LIMIT = 90
+
 export const getRandomNum = (min: number, max: number): number => {
   return Math.random() * (max - min) + min;
 };

@@ -1,5 +1,6 @@
 .classicGameMenu {
-    background-color: rgb(10, 101, 101);
+    /* background-color: rgb(63, 90, 153); */
+    /* background-color: rgb(68, 24, 60); */
     display: flex;
     height: 100vh;
     flex-direction: column;

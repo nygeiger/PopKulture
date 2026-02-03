@@ -51,7 +51,7 @@ export default function QuestionCard(props: QuestionCardProps) {
       // props.addTeamPoints(answerAward)
       setCorrectAnserSelected(true);
     } else {
-      answerChoiceButton.className = answerChoiceButton.className + " incorrect";
+      answerChoiceButton.className = answerChoiceButton.className + " incorrect noHover";
       answerChoiceButton.disabled = true;
       // setAnswerAward(answerAward - WRONG_ANSWER_PENALTY);
     }

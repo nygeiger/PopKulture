@@ -3,7 +3,8 @@
     /* background-color: rgb(213, 116, 35); */
     /* background-color: rgb(169, 86, 17); */
     /* background-color: rgb(63, 90, 153); */
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    background-color: rgb(57, 41, 73);
     display: flex;
     height: 100vh;
     flex-direction: column;

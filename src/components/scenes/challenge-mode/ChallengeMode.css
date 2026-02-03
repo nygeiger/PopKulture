@@ -5,7 +5,7 @@
 .challengeMode {
     /* width: 150vh; */
     height: 100vh;
-    /* background-color: rgb(10, 101, 101); */
+    /* background-color: thistle; */
     display: flex;
     flex-direction: column;
     align-items: center;
