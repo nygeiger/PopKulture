@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./ChallengeMode.css"
 import { SceneDict, type Question } from "../../../lib/definitions";
-import { getRandomInt } from "../../../lib/utils";
+import { CHALLENGE_MODE_TIME_LIMIT, getRandomInt } from "../../../lib/utils";
 import ChallengeQuestionCard, { type ChallengeQuestionCardProps } from "../../question-card/ChallengeQuestionCard";
 
 export type ChallengeModeProps = {
@@ -14,7 +14,7 @@ export default function ChallengeMode(props: ChallengeModeProps) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomInt(0, props.questions.length));
     const [currentScore, setCurrentScore] = useState(0);
     const [additionalPoints, setAdditionalPoints] = useState(0);
-    const [secondsRemaining, setSecondsRemaining] = useState(90)
+    const [secondsRemaining, setSecondsRemaining] = useState(CHALLENGE_MODE_TIME_LIMIT)
     const visitedQuestions = useRef(new Set<string>())
 
 

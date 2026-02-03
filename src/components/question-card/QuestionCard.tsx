@@ -41,7 +41,7 @@ export default function QuestionCard(props: QuestionCardProps) {
 
   const correctAnswer = letterToIndex(
     props.question.CorrectAnswer as CorrectAnswerType
-  );
+  ) ?? 0;
 
   console.log("Correct answer is " + props.question.CorrectAnswer + " aka " + correctAnswer);
 
