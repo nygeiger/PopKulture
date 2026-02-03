@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { SceneDict, type Question, type Team } from "../../../lib/definitions";
 import { getRandomInt, POINTS_TO_WIN } from "../../../lib/utils";
 import "./ClassicMode.css";
@@ -9,24 +9,19 @@ export type ClassicGameProps = {
     setWinningTeam: (teamIndex: number) => void;
     questions: Question[];
     teams: Team[];
-    visitedQuestions: Set<string>;
 }
 
 export default function ClassicGame(props: ClassicGameProps) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomInt(0, props.questions.length));
     const [currentTeamIndex, serCurrentTeamIndex] = useState(0);
     const [additionalPoints, setAdditionalPoints] = useState(0);
+    const visitedQuestions = useRef(new Set<string>())
 
     const isSoloGame = props.teams.length === 1;
     const currentTeam = props.teams[currentTeamIndex];
 
-
-    useEffect(() => {
-        props.visitedQuestions.clear();
-    }, [])
-
-    const addTeamPoints = (addPoints: number) => {
-        setAdditionalPoints(addPoints)
+    const addTeamPoints = (additionalPoints: number) => {
+        setAdditionalPoints(additionalPoints)
     }
 
     const incrementCurrTeam = () => {
@@ -37,21 +32,24 @@ export default function ClassicGame(props: ClassicGameProps) {
         }
     }
 
-    function getNextQuestInd(): number {
-        if (props.visitedQuestions.size === props.questions.length) {
-            props.visitedQuestions.clear() // ?: Put in useEffect
+    function getNextQuestIndex(): number {
+        if (visitedQuestions.current.size === props.questions.length) {
+            visitedQuestions.current.clear()
         }
 
-        let newQuestionIndex;
+        let newQuestionIndex: number | null = null;
 
         // TODO: Should be fine for now. Find more efficient process for when there are more questions
-        while (!newQuestionIndex) {
-            const newIndex = getRandomInt(0, props.questions.length)
+        while (newQuestionIndex === null) {
+            const newIndex = getRandomInt(0, props.questions.length ?? 0)
 
-            if (!props.visitedQuestions.has(props.questions[newIndex].id)) {
+            console.log("Getting new int: " + newIndex)
+            if (!visitedQuestions.current.has(props.questions[newIndex].id)) {
+                console.log("Setting new ind: " + newIndex)
                 newQuestionIndex = newIndex
             }
         }
+        visitedQuestions.current.add(props.questions[newQuestionIndex].id)
         return newQuestionIndex;
     }
 
@@ -62,7 +60,7 @@ export default function ClassicGame(props: ClassicGameProps) {
             props.handleChangeSceneButtonClick(SceneDict.WINNER_SCENE)
         }
         setAdditionalPoints(0);
-       setCurrentQuestionIndex(getNextQuestInd());
+        setCurrentQuestionIndex(getNextQuestIndex());
     }
 
     // TODO: Add suspense and skeleton to question card

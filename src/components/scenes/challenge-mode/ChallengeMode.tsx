@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./ChallengeMode.css"
 import { SceneDict, type Question } from "../../../lib/definitions";
 import { getRandomInt } from "../../../lib/utils";
@@ -8,7 +8,6 @@ export type ChallengeModeProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void;
     setChallengeScore: (score: number) => void
     questions: Question[];
-    visitedQuestions: Set<string>;
 };
 
 export default function ChallengeMode(props: ChallengeModeProps) {
@@ -16,51 +15,52 @@ export default function ChallengeMode(props: ChallengeModeProps) {
     const [currentScore, setCurrentScore] = useState(0);
     const [additionalPoints, setAdditionalPoints] = useState(0);
     const [secondsRemaining, setSecondsRemaining] = useState(90)
+    const visitedQuestions = useRef(new Set<string>())
+
 
     useEffect(() => {
         props.setChallengeScore(0)
-        props.visitedQuestions.clear()
     }, [])
 
     useEffect(() => {
-        if (props.questions[0]) {
-            const intervalId = setInterval(() => {
+        if (props.questions.length >= 1) {
+            const timeoutId = setTimeout(() => {
                 secondsRemaining > 0 ? setSecondsRemaining(secondsRemaining - 1) : props.handleChangeSceneButtonClick(SceneDict.CHALLENGE_OVER)
             }, 1000)
-            return () => clearInterval(intervalId)
+            return () => clearTimeout(timeoutId)
         }
-    }, [secondsRemaining])
+    }, [secondsRemaining, props.questions.length])
 
-    function getNextQuestInd(): number {
-        if (props.visitedQuestions.size === props.questions.length) {
-            props.visitedQuestions.clear() // ?: Put in useEffect
+    function getNextQuestIndex(): number {
+        if (visitedQuestions.current.size === props.questions.length) {
+            visitedQuestions.current.clear()
         }
 
-        let newQuestionIndex;
+        let newQuestionIndex: number | null = null;
 
         // TODO: Should be fine for now. Find more efficient process for when there are more questions
-        while (!newQuestionIndex) {
-            const newIndex = getRandomInt(0, props.questions.length)
+        while (newQuestionIndex === null) {
+            const newIndex = getRandomInt(0, props.questions.length ?? 0)
 
-            if (!props.visitedQuestions.has(props.questions[newIndex].id)) {
+            console.log("Getting new int: " + newIndex)
+            if (!visitedQuestions.current.has(props.questions[newIndex].id)) {
+                console.log("Setting new ind: " + newIndex)
                 newQuestionIndex = newIndex
             }
         }
+        visitedQuestions.current.add(props.questions[newQuestionIndex].id)
         return newQuestionIndex;
     }
 
     const handleNextQuestion = () => {
         setAdditionalPoints(0)
         setCurrentScore(currentScore + additionalPoints)
-
-        let nextQuestInd = getRandomInt(0, props.questions.length);
-        if (props.visitedQuestions.has(props.questions[nextQuestInd].id))
-        setCurrentQuestionIndex(getNextQuestInd());
+        setCurrentQuestionIndex(getNextQuestIndex());
     }
 
-    const addPoints = (addPoints: number) => {
-        props.setChallengeScore(currentScore + addPoints);
-        setAdditionalPoints(addPoints)
+    const addPoints = (additionalPoints: number) => {
+        props.setChallengeScore(currentScore + additionalPoints);
+        setAdditionalPoints(additionalPoints)
     }
 
     const challengeQuestionCardProps: ChallengeQuestionCardProps = { question: props.questions[currentQuestionIndex], addPoints, nextQuestion: handleNextQuestion, }
