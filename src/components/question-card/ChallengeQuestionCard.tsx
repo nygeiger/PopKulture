@@ -25,7 +25,7 @@ export default function ChallengeQuestionCard(props: ChallengeQuestionCardProps)
         props.nextQuestion();
     }
 
-    const questionCardProps: QuestionCardProps = { question: props.question, nextQuestion, handleAnswerClick};
+    const questionCardProps: QuestionCardProps = { question: props.question, variant: "challenge", nextQuestion, handleAnswerClick};
 
     return (
         <QuestionCard {...questionCardProps} />

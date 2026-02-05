@@ -4,13 +4,24 @@
 
 .challengeMode {
     /* width: 150vh; */
-    height: 100vh;
+    /* height: 100vh; */
     /* background-color: thistle; */
+    height: 95%;
+    width: 95%;
+    /* background-color: rgb(241, 234, 244); */
+    background-color: #F5F7FA;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    outline: .2rem solid rgb(219, 162, 246);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     /* overflow: hidden; */
+}
+
+.challengeGameHeader {
+    font-size: large;
 }
 
 .gameSection {
@@ -30,4 +41,11 @@
 .score {
     padding-left: 10px;
     justify-self: left;
+}
+
+.gameBackground {
+    height: 100vh;
+    background-color: white;
+    align-content: center;
+    justify-items: center;
 }

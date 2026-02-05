@@ -66,19 +66,21 @@ export default function ClassicGame(props: ClassicGameProps) {
     // TODO: Add suspense and skeleton to question card
     // ?: Create new component for teams? HTML may be difficult to read
     return (
-        <div className="classicGame">
-            <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
-            <div className="classicGameHeader">Classic Mode</div>
-            <div className="gameSection">
-                <div className="teams">
-                    <div className="currentTeam"><div>{isSoloGame ? "Your Score" : currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
-                    <div>
-                        {isSoloGame || props.teams.map((e, i) => {
-                            return i === currentTeamIndex ? "" : (<div className="team" key={e.name}><div>{isSoloGame ? "Your Score" : e.name}</div><div>{e.points}</div></div>)
-                        })}
+        <div className="gameBackground">
+            <div className="classicGame">
+                <button className="toMainMenuButton" style={{ position: "absolute", top: "3%", left: "3%" }} onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
+                <div className="classicGameHeader">Classic Mode</div>
+                <div className="gameSection">
+                    <div className="teams">
+                        <div className="currentTeam"><div>{isSoloGame ? "Your Score" : currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
+                        <div>
+                            {isSoloGame || props.teams.map((e, i) => {
+                                return i === currentTeamIndex ? "" : (<div className="team" key={e.name}><div>{isSoloGame ? "Your Score" : e.name}</div><div>{e.points}</div></div>)
+                            })}
+                        </div>
                     </div>
+                    {props.questions[0] ? <ClassicQuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} /> : <span>...Loading Question :)</span>}
                 </div>
-                {props.questions[0] ? <ClassicQuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} /> : <span>...Loading Question :)</span>}
             </div>
         </div>
     )

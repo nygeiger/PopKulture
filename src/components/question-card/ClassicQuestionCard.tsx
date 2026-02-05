@@ -27,7 +27,7 @@ export default function ClassicQuestionCard(props: ClassicQuestionCardProps) {
         props.incrementCurrTeam();
     }
 
-    const questionCardProps: QuestionCardProps = { question: props.question, nextQuestion, handleAnswerClick};
+    const questionCardProps: QuestionCardProps = { question: props.question, variant: "classic",nextQuestion, handleAnswerClick};
 
     return (
         <QuestionCard {...questionCardProps} />

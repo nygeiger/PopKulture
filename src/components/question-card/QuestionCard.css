@@ -3,8 +3,29 @@
     border-style: solid;
     border-radius: 8px;
     border-width: 2px;
-    background-color: cadetblue;
+    color: white;
     align-items: center;
+}
+
+/* .questionCard {
+    width: 100%;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 2px;
+    color: white;
+    align-items: center;
+    display: grid;
+    grid-template-rows: 20% 80%;
+} */
+
+.questionCard.classicVariant {
+    background-color: #4A90E2;
+}
+
+.questionCard.challengeVariant {
+    background-color: #6C5CE7;
+    border-color: black;
+    color: white;
 }
 
 .questionSection {
@@ -29,13 +50,12 @@
 
 .answerElement {
     text-align: center;
-    cursor: pointer;
+    /* cursor: pointer; */
     border: 1px solid #d0d0d0;
     border-radius: 6px;
     height: 5rem;
     width: 90%;
     min-width: 5rem;
-    transition: all 0.2s;
 }
 
 /* .answerElement:not(.incorrect):hover {

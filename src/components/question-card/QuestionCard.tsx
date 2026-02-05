@@ -19,18 +19,13 @@ function letterToIndex(answerLetter: CorrectAnswerType): number {
 
 export type QuestionCardProps = {
   question: Question;
+  variant: "classic" | "challenge";
   nextQuestion: () => void;
-  // addTeamPoints: (addPoints: number) => void;
-  // incrementCurrTeam: () => void;
-  // type: string;
   handleAnswerClick?: (isCorrectAnswer: boolean) => void;
-  // getNextQuestion?: () => void;
-
 };
 
 export default function QuestionCard(props: QuestionCardProps) {
   const [correctAnserSelected, setCorrectAnserSelected] = useState(false);
-  // const [answerAward, setAnswerAward] = useState(QUESTIONS_INITIAL_POINTS);
 
   const answers = [
     props.question.AnswerA,
@@ -48,12 +43,10 @@ export default function QuestionCard(props: QuestionCardProps) {
   const handleAnswerClick = (isCorrectAnswer: boolean, e: BaseSyntheticEvent) => {
     const answerChoiceButton: HTMLButtonElement = e.target;
     if (isCorrectAnswer) {
-      // props.addTeamPoints(answerAward)
       setCorrectAnserSelected(true);
     } else {
       answerChoiceButton.className = answerChoiceButton.className + " incorrect noHover";
       answerChoiceButton.disabled = true;
-      // setAnswerAward(answerAward - WRONG_ANSWER_PENALTY);
     }
     if (props.handleAnswerClick) props.handleAnswerClick(isCorrectAnswer)
   };
@@ -64,12 +57,11 @@ export default function QuestionCard(props: QuestionCardProps) {
   }
 
   return (
-    <div className="questionCard">
+    <div className={`questionCard ${props.variant ?? "classic"}Variant`}>
       <span className="questionSection">{props.question.Question}</span>
       {correctAnserSelected ? (
         <div className="correctAnswerDisplay">
           <span>{`${answers[correctAnswer]} Correct Answer !`}</span>
-          {/* {props.type === "classicMode" && <div className="qCardEarnedPoints">{`+${answerAward} points`}</div>} */}
           <button className="newQuesButton" onClick={() => getNextQuestion()}>Get New Question</button>
         </div>
       ) : (<div className="answerSection">
