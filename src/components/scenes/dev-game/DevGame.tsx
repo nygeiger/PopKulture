@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getQuestions, helloBackend } from "../../../lib/actions";
 import { SceneDict, type Question, type QuestionsResponseJSON } from "../../../lib/definitions";
-import GameBoard from "../../game-board/GameBoard";
+import GameBoard from "./game-board/GameBoard";
 
 
 type DevGameProps = {

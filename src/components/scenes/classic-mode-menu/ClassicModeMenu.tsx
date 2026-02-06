@@ -25,7 +25,7 @@ export default function ClassicGameMenu(props: ClassicGameMenuProps) {
     const [numTeams, setNumTeams] = useState<number>(1);
 
     const handleTeamsChange = (e: BaseSyntheticEvent) => {
-        setNumTeams(Number(e.target.value));
+        setNumTeams(parseInt(e.target.value));
     }
 
 

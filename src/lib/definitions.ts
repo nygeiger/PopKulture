@@ -28,6 +28,6 @@ export type QuestionsResponseJSON = {
 };
 
 export type Team = {
-    name: string,
-    points: number
+  name: string,
+  points: number
 }

@@ -52,7 +52,7 @@ export default function QuestionCard(props: QuestionCardProps) {
   };
 
   const getNextQuestion = () => {
-    setCorrectAnserSelected(false); //TODO: Is this the correct way to "reload" component? Should we get a completely new instance?
+    setCorrectAnserSelected(false); //?: Is this the correct way to "reload" component? Should we get a completely new instance?
     props.nextQuestion();
   }
 

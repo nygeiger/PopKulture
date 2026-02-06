@@ -1,5 +1,5 @@
-import { getDefaultCategories } from "../../lib/actions";
-import type { Question } from "../../lib/definitions";
+import { getDefaultCategories } from "../../../../lib/actions";
+import type { Question } from "../../../../lib/definitions";
 import Category from "../category/Categories";
 import "./GameBoard.css";
 

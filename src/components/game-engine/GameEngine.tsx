@@ -36,7 +36,7 @@ export default function GameEngine() {
   }
 
   useEffect((() => {
-    retrieveQuestions() // prevent this from running for testing
+    retrieveQuestions()
   }), [])
 
   const handleSceneChange = (newSceneName: string) => {

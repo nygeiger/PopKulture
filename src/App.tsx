@@ -1,4 +1,3 @@
-// import "./App.css";
 import "./Global.css"
 import GameEngine from "./components/game-engine/GameEngine";
 
