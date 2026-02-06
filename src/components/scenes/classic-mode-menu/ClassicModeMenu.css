@@ -23,3 +23,12 @@
     padding-bottom: 20px;
     font-weight: bold;
 }
+
+.teamsSelect {
+    position: relative;
+    border-radius: 90px;
+    /* width: 8%;
+    height: 2.2%; */
+    top: 1%;
+    text-align: center;
+}
