@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import "./ChallengeMode.css"
 import { SceneDict, type Question } from "../../../lib/definitions";
 import { CHALLENGE_MODE_TIME_LIMIT, getRandomInt } from "../../../lib/utils";
 import ChallengeQuestionCard, { type ChallengeQuestionCardProps } from "../../question-card/ChallengeQuestionCard";
+import "./ChallengeMode.css"
+
 
 export type ChallengeModeProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void;
@@ -67,17 +68,18 @@ export default function ChallengeMode(props: ChallengeModeProps) {
 
     // TODO: extract Side Labels into it's on component
     return (
-        <div className="gameBackground">
-            <div className="challengeMode">
-                <span className="challengeGameHeader">Challenge Mode</span>
+        <div className="challengeMode">
+            <div className="toMenuButtons">
                 <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
-                <p>{`Seconds left: ${secondsRemaining}`}</p>
-                <div className="gameSection">
-                    <div className="score">
-                        <div className="currentScore"><div>{"Your Score"}</div><div>{additionalPoints ? <>{currentScore}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentScore}</div></div>
-                    </div>
-                    {props.questions[0] ? <ChallengeQuestionCard {...challengeQuestionCardProps} /> : <span>...Loading Question :)</span>}
+                <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode Menu</button>
+            </div>
+            <span className="challengeGameHeader">Challenge Mode</span>
+            <p>{`Seconds left: ${secondsRemaining}`}</p>
+            <div className="gameSection">
+                <div className="score">
+                    <div className="currentScore"><div>{"Your Score"}</div><div>{additionalPoints ? <>{currentScore}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentScore}</div></div>
                 </div>
+                {props.questions[0] ? <ChallengeQuestionCard {...challengeQuestionCardProps} /> : <span>...Loading Question :)</span>}
             </div>
         </div>
     )

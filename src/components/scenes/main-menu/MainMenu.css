@@ -1,25 +1,12 @@
 .mainMenu {
-    /* background-color: rgb(36, 68, 143); */
-    /* background-color: rgb(213, 116, 35); */
-    /* background-color: rgb(169, 86, 17); */
-    /* background-color: rgb(63, 90, 153); */
-    /* background-color: blueviolet; */
-    background-color: rgb(57, 41, 73);
+    height: 95%;
+    width: 95%;
+    background-color: rgb(200, 60, 50);
+    color: white;
+    border: 2px solid rgb(238, 87, 76);
+    border-radius: 12px;
     display: flex;
-    height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
-/* .titleText {
-    color: goldenrod;
-    padding-bottom: 50px;
-} */
-
-/* .mainMenu .titleText {
-    color: goldenrod;
-    position: relative;
-    right: 50%;
-    top: 50%;
-} */

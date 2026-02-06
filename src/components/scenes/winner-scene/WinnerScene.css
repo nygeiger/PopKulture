@@ -1,9 +1,17 @@
 .winnerScene {
-    background-color: teal;
+    height: 95%;
+    width: 95%;
     display: flex;
-    height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: goldenrod;
+    color: white;
+    background-color: #4A90E2;
+    border: 2px solid #357ABD;
+    border-radius: 12px;
+}
+
+.congratsText {
+    font-size: larger;
+    padding-bottom: 10px;
 }

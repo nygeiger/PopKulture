@@ -1,4 +1,8 @@
 .gameEngine {
+    height: 100vh;
+    background-color: white;
+    align-content: center;
+    justify-items: center;
     font-family: Verdana, Arial, sans-serif;
     font-size: .9rem;
 }

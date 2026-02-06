@@ -1,5 +1,4 @@
 .titleText {
-    color: goldenrod;
     padding-bottom: 50px; /* TODO: remove this line to make this more "global? */
 }
 button {
@@ -19,12 +18,15 @@ button:not(.noHover):hover {
     cursor: auto;
 }
 
+.toMenuButtons {
+    position: fixed;
+    top: 3%;
+    left: 3%;
+}
+
 .toMainMenuButton {
     text-align: center;
     border: 1px solid #d0d0d0;
     border-radius: 6px;
     height: 1.5rem;
-    position: fixed;
-    top: 3%;
-    left: 3%;
 }

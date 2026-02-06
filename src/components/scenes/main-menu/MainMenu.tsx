@@ -16,8 +16,7 @@ export default function MainMenu(props: MainMenuProps) {
       <div className="titleText">Throwback Trivia. Do you know your stuff?</div>
       {showGameModes ? (
         <div>
-          <button className="playDevGameMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.DEV_GAME)}>Dev Game</button>{" "}
-          {/* <button className="playClassicMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME)}>Classic Mode</button>{" "} */}
+          {import.meta.env.VITE_DEBUG === "1" && <button className="playDevGameMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.DEV_GAME)}>Dev Game</button>}{" "}
           <button className="playClassicMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME_MENU)}>Classic Mode</button>{" "}
           <button className="playChallengeMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode</button>
         </div>

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { SceneDict, type Team } from "../../../lib/definitions";
-import "./ClassicModeMenu.css"
 import { MAX_TEAMS, POINTS_TO_WIN } from "../../../lib/utils";
+import "./ClassicModeMenu.css"
+
 
 export type ClassicGameMenuProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void
@@ -28,13 +29,13 @@ export default function ClassicGameMenu(props: ClassicGameMenuProps) {
             <p className="cmmenuTitleText">Get ready for Pop Kulture (Classic Mode) !!</p>
             <p>{`Reach ${POINTS_TO_WIN.toLocaleString()} points to win`}</p>
             <div className="cmmMenuText">
-                <span>How Many teams will be playing? - </span><b style={{ paddingRight: "5px" }}>{`${numTeams > 1 ? `${numTeams} Teams` : "Solo Game"}`}</b>
+                <span>How Many teams will be playing?</span><span style={{ paddingLeft: "2px", paddingRight: "2px" }}>-</span><b style={{ paddingRight: "3px", letterSpacing: "-1px" }}>{`${numTeams > 1 ? `${numTeams} Teams` : "Solo Game"}`}</b>
                 <span>
                     <button onClick={() => setNumTeams(numTeams >= MAX_TEAMS ? MAX_TEAMS : numTeams + 1)}>^</button><button onClick={() => setNumTeams(numTeams <= 1 ? 1 : numTeams - 1)}>&#8964;</button>
                 </span>
             </div>
             <div style={{ position: "relative", top: "30px" }}>
-                <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
+                <button className="toMainMenuButton toMenuButtons" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
                 <button onClick={() => { props.setTeams(createTeams(numTeams)); props.handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME) }}>PLAY</button>
             </div>
         </div>
