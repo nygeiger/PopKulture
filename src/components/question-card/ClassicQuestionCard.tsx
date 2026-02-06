@@ -2,6 +2,7 @@ import { useState } from "react";
 import { QUESTIONS_INITIAL_POINTS, WRONG_ANSWER_PENALTY } from "../../lib/utils";
 import type { Question } from "../../lib/definitions";
 import QuestionCard, { type QuestionCardProps } from "./QuestionCard";
+import QuestionCardSkeleton from "../skeletons/QuestionCardSkeleton";
 
 type ClassicQuestionCardProps = {
     addTeamPoints: (addPoints: number) => void;
@@ -12,6 +13,7 @@ type ClassicQuestionCardProps = {
 
 export default function ClassicQuestionCard(props: ClassicQuestionCardProps) {
     const [answerAward, setAnswerAward] = useState(QUESTIONS_INITIAL_POINTS);
+    const showSkeleton = props.question === undefined;
 
     const handleAnswerClick = (isCorrectAnswer: boolean) => {
         if (isCorrectAnswer) {
@@ -27,9 +29,11 @@ export default function ClassicQuestionCard(props: ClassicQuestionCardProps) {
         props.incrementCurrTeam();
     }
 
-    const questionCardProps: QuestionCardProps = { question: props.question, variant: "classic",nextQuestion, handleAnswerClick};
+    const questionCardProps: QuestionCardProps = { question: props.question, variant: "classic", nextQuestion, handleAnswerClick };
 
     return (
-        <QuestionCard {...questionCardProps} />
+        <>
+            {showSkeleton ? <QuestionCardSkeleton /> : <QuestionCard {...questionCardProps} />}
+        </>
     );
 }

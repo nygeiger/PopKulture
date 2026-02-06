@@ -63,8 +63,7 @@ export default function ClassicGame(props: ClassicGameProps) {
         setCurrentQuestionIndex(getNextQuestIndex());
     }
 
-    // TODO: Add suspense and skeleton to question card
-    // ?: Create new component for teams? HTML may be difficult to read
+    // TODO: Create new component for teams? HTML may be difficult to read
     return (
         <div className="classicGame">
             <div className="toMenuButtons" style={{ position: "fixed", top: "3%", left: "3%" }}>
@@ -82,7 +81,7 @@ export default function ClassicGame(props: ClassicGameProps) {
                         })}
                     </div>
                 </div>
-                {props.questions[0] ? <ClassicQuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} /> : <span>...Loading Question :)</span>}
+                <ClassicQuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} />
             </div>
         </div>
     )
