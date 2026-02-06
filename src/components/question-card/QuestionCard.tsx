@@ -61,7 +61,7 @@ export default function QuestionCard(props: QuestionCardProps) {
       <span className="questionSection">{props.question.Question}</span>
       {correctAnserSelected ? (
         <div className="correctAnswerDisplay">
-          <span>{`${answers[correctAnswer]} Correct Answer !`}</span>
+          <span><b>{`${answers[correctAnswer].replaceAll('*', "")} `}</b><span>Correct Answer!</span></span>
           <button className="newQuesButton" onClick={() => getNextQuestion()}>Get New Question</button>
         </div>
       ) : (<div className="answerSection">

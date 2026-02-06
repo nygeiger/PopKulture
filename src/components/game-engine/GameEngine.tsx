@@ -80,7 +80,7 @@ export default function GameEngine() {
     [SceneDict.CHALLENGE_OVER]: <ChallengeOverScene {...getSceneProps(SceneDict.CHALLENGE_OVER) as ChallengeOverProps} />
   };
 
-  const currentSceneComponent = sceneComponentMap[currentSceneName] ||
+  const currentSceneComponent = sceneComponentMap[currentSceneName] ??
     <MainMenu {...getSceneProps(SceneDict.MAIN_MENU)} />;
 
   return <div className="gameEngine">{currentSceneComponent}</div>;
