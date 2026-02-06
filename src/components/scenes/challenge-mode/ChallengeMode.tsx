@@ -79,7 +79,7 @@ export default function ChallengeMode(props: ChallengeModeProps) {
                 <div className="score">
                     <div className="currentScore"><div>{"Your Score"}</div><div>{additionalPoints ? <>{currentScore}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentScore}</div></div>
                 </div>
-                {props.questions[0] ? <ChallengeQuestionCard {...challengeQuestionCardProps} /> : <span>...Loading Question :)</span>}
+                <ChallengeQuestionCard {...challengeQuestionCardProps} />
             </div>
         </div>
     )

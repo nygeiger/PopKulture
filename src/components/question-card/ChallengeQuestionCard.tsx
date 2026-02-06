@@ -2,6 +2,7 @@ import { useState } from "react";
 import { QUESTIONS_INITIAL_POINTS, WRONG_ANSWER_PENALTY } from "../../lib/utils";
 import type { Question } from "../../lib/definitions";
 import QuestionCard, { type QuestionCardProps } from "./QuestionCard";
+import QuestionCardSkeleton from "../skeletons/QuestionCardSkeleton";
 
 export type ChallengeQuestionCardProps = {
     question: Question;
@@ -11,6 +12,7 @@ export type ChallengeQuestionCardProps = {
 
 export default function ChallengeQuestionCard(props: ChallengeQuestionCardProps) {
     const [answerAward, setAnswerAward] = useState(QUESTIONS_INITIAL_POINTS);
+    const showSkeleton = props.question === undefined;
 
     const handleAnswerClick = (isCorrectAnswer: boolean) => {
         if (isCorrectAnswer) {
@@ -27,7 +29,8 @@ export default function ChallengeQuestionCard(props: ChallengeQuestionCardProps)
 
     const questionCardProps: QuestionCardProps = { question: props.question, variant: "challenge", nextQuestion, handleAnswerClick};
 
-    return (
-        <QuestionCard {...questionCardProps} />
+    return (<>
+        {showSkeleton ? <QuestionCardSkeleton /> : <QuestionCard {...questionCardProps} />}
+        </>
     );
 }
