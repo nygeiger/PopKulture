@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import GameEngine from './components/game-engine/GameEngine.tsx'
-import './index.css'
 import "./Global.css"
 
 createRoot(document.getElementById('root')!).render(
@@ -15,6 +14,9 @@ createRoot(document.getElementById('root')!).render(
 
 // ?: theming? check here for color scheming --> https://www.yahoo.com/news/why-traditional-black-history-month-222436126.html
 // ?------  color scheme tool --> https://paletton.com/#uid=73i0u0kqLqMgfyilasJsIlbyfgg
+
+// ?: Move api logic from Google App Script to backend via their API?
+// ?----- https://developers.google.com/workspace/sheets/api/guides/libraries#nodejs
 
 // TODO: Design question by category fetching.
 // TODO----   Most likely configure database api to take in parameter and return questions by category

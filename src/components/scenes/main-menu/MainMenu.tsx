@@ -12,7 +12,7 @@ export default function MainMenu(props: MainMenuProps) {
   // ?: This allows for a Classic & Challenge Mode leaderboard
   return (
     <div className="mainMenu">
-      <div className="titleText">Kulture Wars</div>
+      <div className="titleText">Pop Kulture Wars</div>
       <div className="titleText">Throwback Trivia. Do you know your stuff?</div>
       {showGameModes ? (
         <div>
