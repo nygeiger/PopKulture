@@ -1,17 +1,16 @@
 import express from "express"
 import cors from "cors"
-import { LOCAL_SERVER_PORT, QUESTIONS_URL } from "../lib/utils.ts"
+import * as dotenv from 'dotenv';
+import { LOCAL_SERVER_PORT } from "../lib/utils.ts"
 
-// TODO: Is node (as seen in the script in package.json) the recommended way to start a backend for typescript react
-
+//!: use middleware to wrap requests in appropriate cors authorization
+dotenv.config();
+const { QUESTIONS_URL } = process.env
 const app = express()
 app.use(cors())
 
-// use middleware to wrap requests in appropriate cors authorization
-
 // app.use("/api", async (req, res) => {
 app.use("/get-all-questions", async (_, res) => {
-    // const reqURL = `${QUESTIONS_URL}${req.url}` // will probably need for potential post requests
     const reqURL = `${QUESTIONS_URL}`
     try {
         const apiResponse = await fetch(reqURL);
