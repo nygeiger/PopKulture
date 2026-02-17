@@ -9,7 +9,7 @@ import { getQuestions } from "../../lib/actions";
 import WinnerScene, { type WinnerSceneProps } from "../scenes/winner-scene/WinnerScene";
 import ChallengeMode, { type ChallengeModeProps } from "../scenes/challenge-mode/ChallengeMode";
 import ChallengeOverScene, { type ChallengeOverProps } from "../scenes/challenge-over-scene/ChallengeOver";
-import ChallengeModeMenu, { type ChallengeModeMenuProps } from "../scenes/challenge-mode-menu/ChallengeModeMenu";
+import ChallengeModeMenu from "../scenes/challenge-mode-menu/ChallengeModeMenu";
 import "./GameEngine.css"
 
 export default function GameEngine() {
@@ -56,14 +56,11 @@ export default function GameEngine() {
       case SceneDict.CHALLENGE_GAME:
         const chgProps: ChallengeModeProps = { ...baseProps, questions: questionsList, setChallengeScore: setChallengeScore };
         return chgProps;
-      case SceneDict.CHALLENGE_GAME_MENU:
-        const chgmProps: ChallengeModeMenuProps = { ...baseProps };
-        return chgmProps;
       case SceneDict.CHALLENGE_OVER:
         const chgoProps: ChallengeOverProps = { ...baseProps, points: challengeScore };
         return chgoProps;
       case SceneDict.WINNER_SCENE:
-        const wsProps: WinnerSceneProps = { ...baseProps, winningTeam: teams[winningTeamIndex] };
+        const wsProps: WinnerSceneProps = { ...baseProps, winningTeam: teams[winningTeamIndex], isSoloGame: teams.length <= 1};
         return wsProps;
       default:
         return baseProps;

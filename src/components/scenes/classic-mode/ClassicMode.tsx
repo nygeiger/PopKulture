@@ -12,20 +12,22 @@ export type ClassicGameProps = {
 }
 
 export default function ClassicGame(props: ClassicGameProps) {
+    const {handleChangeSceneButtonClick, setWinningTeam, questions, teams} = props;
+
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomInt(0, props.questions.length));
     const [currentTeamIndex, serCurrentTeamIndex] = useState(0);
     const [additionalPoints, setAdditionalPoints] = useState(0);
     const visitedQuestions = useRef(new Set<string>())
 
-    const isSoloGame = props.teams.length === 1;
-    const currentTeam = props.teams[currentTeamIndex];
+    const isSoloGame = teams.length === 1;
+    const currentTeam = teams[currentTeamIndex];
 
     const addTeamPoints = (additionalPoints: number) => {
         setAdditionalPoints(additionalPoints)
     }
 
     const incrementCurrTeam = () => {
-        if (currentTeamIndex >= props.teams.length - 1) {
+        if (currentTeamIndex >= teams.length - 1) {
             serCurrentTeamIndex(0);
         } else {
             serCurrentTeamIndex(currentTeamIndex + 1);
@@ -33,7 +35,7 @@ export default function ClassicGame(props: ClassicGameProps) {
     }
 
     function getNextQuestIndex(): number {
-        if (visitedQuestions.current.size === props.questions.length) {
+        if (visitedQuestions.current.size === questions.length) {
             visitedQuestions.current.clear()
         }
 
@@ -41,23 +43,23 @@ export default function ClassicGame(props: ClassicGameProps) {
 
         // TODO: Should be fine for now. Find more efficient process for when there are more questions
         while (newQuestionIndex === null) {
-            const newIndex = getRandomInt(0, props.questions.length ?? 0)
+            const newIndex = getRandomInt(0, questions.length ?? 0)
 
             IS_DEBUG && console.log("Getting new int: " + newIndex)
-            if (!visitedQuestions.current.has(props.questions[newIndex].id)) {
+            if (!visitedQuestions.current.has(questions[newIndex].id)) {
                 IS_DEBUG && console.log("Setting new ind: " + newIndex)
                 newQuestionIndex = newIndex
             }
         }
-        visitedQuestions.current.add(props.questions[newQuestionIndex].id)
+        visitedQuestions.current.add(questions[newQuestionIndex].id)
         return newQuestionIndex;
     }
 
     const handleNextQuestion = () => {
         currentTeam.points += additionalPoints;
         if (currentTeam.points >= POINTS_TO_WIN) {
-            props.setWinningTeam(currentTeamIndex)
-            props.handleChangeSceneButtonClick(SceneDict.WINNER_SCENE)
+            setWinningTeam(currentTeamIndex)
+            handleChangeSceneButtonClick(SceneDict.WINNER_SCENE)
         }
         setAdditionalPoints(0);
         setCurrentQuestionIndex(getNextQuestIndex());
@@ -67,8 +69,8 @@ export default function ClassicGame(props: ClassicGameProps) {
     return (
         <div className="classicGame">
             <div className="toMenuButtons" style={{ position: "fixed", top: "3%", left: "3%" }}>
-                <button onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
-                <button onClick={() => props.handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME_MENU)}>Classic Mode Menu</button>
+                <button onClick={() => handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
+                <button onClick={() => handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME_MENU)}>Classic Mode Menu</button>
             </div>
 
             <div className="classicGameHeader">Classic Mode</div>
@@ -76,12 +78,12 @@ export default function ClassicGame(props: ClassicGameProps) {
                 <div className="teams">
                     <div className="currentTeam"><div>{isSoloGame ? "Your Score" : currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
                     <div>
-                        {isSoloGame || props.teams.map((e, i) => {
+                        {isSoloGame || teams.map((e, i) => {
                             return i === currentTeamIndex ? "" : (<div className="team" key={e.name}><div>{isSoloGame ? "Your Score" : e.name}</div><div>{e.points}</div></div>)
                         })}
                     </div>
                 </div>
-                <ClassicQuestionCard question={props.questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} />
+                <ClassicQuestionCard question={questions[currentQuestionIndex]} nextQuestion={handleNextQuestion} addTeamPoints={addTeamPoints} incrementCurrTeam={incrementCurrTeam} />
             </div>
         </div>
     )

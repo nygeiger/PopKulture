@@ -12,28 +12,29 @@ export type ChallengeModeProps = {
 };
 
 export default function ChallengeMode(props: ChallengeModeProps) {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomInt(0, props.questions.length));
+    const {handleChangeSceneButtonClick, setChallengeScore, questions} = props;
+
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomInt(0, questions.length));
     const [currentScore, setCurrentScore] = useState(0);
     const [additionalPoints, setAdditionalPoints] = useState(0);
     const [secondsRemaining, setSecondsRemaining] = useState(CHALLENGE_MODE_TIME_LIMIT);
     const visitedQuestions = useRef(new Set<string>());
 
-
     useEffect(() => {
-        props.setChallengeScore(0);
+        setChallengeScore(0);
     }, [])
 
     useEffect(() => {
-        if (props.questions.length >= 1) {
+        if (questions.length >= 1) {
             const timeoutId = setTimeout(() => {
-                secondsRemaining > 0 ? setSecondsRemaining(secondsRemaining - 1) : props.handleChangeSceneButtonClick(SceneDict.CHALLENGE_OVER)
+                secondsRemaining > 0 ? setSecondsRemaining(secondsRemaining - 1) : handleChangeSceneButtonClick(SceneDict.CHALLENGE_OVER)
             }, 1000);
             return () => clearTimeout(timeoutId)
         }
-    }, [secondsRemaining, props.questions.length])
+    }, [secondsRemaining, questions.length])
 
     function getNextQuestIndex(): number {
-        if (visitedQuestions.current.size === props.questions.length) {
+        if (visitedQuestions.current.size === questions.length) {
             visitedQuestions.current.clear();
         }
 
@@ -41,15 +42,15 @@ export default function ChallengeMode(props: ChallengeModeProps) {
 
         // TODO: Should be fine for now. Find more efficient process for when there are more questions
         while (newQuestionIndex === null) {
-            const newIndex = getRandomInt(0, props.questions.length ?? 0)
+            const newIndex = getRandomInt(0, questions.length ?? 0)
 
             IS_DEBUG && console.log("Getting new int: " + newIndex);
-            if (!visitedQuestions.current.has(props.questions[newIndex].id)) {
+            if (!visitedQuestions.current.has(questions[newIndex].id)) {
                 IS_DEBUG && console.log("Setting new ind: " + newIndex);
                 newQuestionIndex = newIndex;
             }
         }
-        visitedQuestions.current.add(props.questions[newQuestionIndex].id)
+        visitedQuestions.current.add(questions[newQuestionIndex].id)
         return newQuestionIndex;
     }
 
@@ -60,18 +61,18 @@ export default function ChallengeMode(props: ChallengeModeProps) {
     }
 
     const addPoints = (additionalPoints: number) => {
-        props.setChallengeScore(currentScore + additionalPoints);
+        setChallengeScore(currentScore + additionalPoints);
         setAdditionalPoints(additionalPoints)
     }
 
-    const challengeQuestionCardProps: ChallengeQuestionCardProps = { question: props.questions[currentQuestionIndex], addPoints, nextQuestion: handleNextQuestion, }
+    const challengeQuestionCardProps: ChallengeQuestionCardProps = { question: questions[currentQuestionIndex], addPoints, nextQuestion: handleNextQuestion, }
 
     // TODO: extract Side Labels into it's on component
     return (
         <div className="challengeMode">
             <div className="toMenuButtons">
-                <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
-                <button className="toMainMenuButton" onClick={() => props.handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode Menu</button>
+                <button className="toMainMenuButton" onClick={() => handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
+                <button className="toMainMenuButton" onClick={() => handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode Menu</button>
             </div>
             <span className="challengeGameHeader">Challenge Mode</span>
             <p>{`Seconds left: ${secondsRemaining}`}</p>

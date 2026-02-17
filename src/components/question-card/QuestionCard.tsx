@@ -15,6 +15,8 @@ function letterToIndex(answerLetter: CorrectAnswerType): number {
       return 2;
     case "Answer D":
       return 3;
+    default:
+      return 0;
   }
 }
 
@@ -26,20 +28,21 @@ export type QuestionCardProps = {
 };
 
 export default function QuestionCard(props: QuestionCardProps) {
+  const { question, variant, nextQuestion } = props
   const [correctAnserSelected, setCorrectAnserSelected] = useState(false);
 
   const answers = [
-    props.question.AnswerA,
-    props.question.AnswerB,
-    props.question.AnswerC,
-    props.question.AnswerD,
+    question.AnswerA,
+    question.AnswerB,
+    question.AnswerC,
+    question.AnswerD,
   ];
 
   const correctAnswer = letterToIndex(
-    props.question.CorrectAnswer as CorrectAnswerType
+    question.CorrectAnswer as CorrectAnswerType
   ) ?? 0;
 
-  IS_DEBUG && console.log("Correct answer is " + props.question.CorrectAnswer + " aka " + correctAnswer);
+  IS_DEBUG && console.log("Correct answer is " + question.CorrectAnswer + " aka " + correctAnswer);
 
   const handleAnswerClick = (isCorrectAnswer: boolean, e: BaseSyntheticEvent) => {
     const answerChoiceButton: HTMLButtonElement = e.target;
@@ -54,12 +57,12 @@ export default function QuestionCard(props: QuestionCardProps) {
 
   const getNextQuestion = () => {
     setCorrectAnserSelected(false); //?: Is this the correct way to "reload" component? Should we get a completely new instance?
-    props.nextQuestion();
+    nextQuestion();
   }
 
   return (
-    <div className={`questionCard ${props.variant ?? "classic"}Variant`}>
-      <span className="questionSection">{props.question.Question}</span>
+    <div className={`questionCard ${variant ?? "classic"}Variant`}>
+      <span className="questionSection">{question.Question}</span>
       {correctAnserSelected ? (
         <div className="correctAnswerDisplay">
           <span><b>{`${answers[correctAnswer].replaceAll('*', "")} `}</b><span>Correct Answer!</span></span>
