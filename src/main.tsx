@@ -21,5 +21,5 @@ createRoot(document.getElementById('root')!).render(
 // TODO: Design question by category fetching.
 // TODO----   Most likely configure database api to take in parameter and return questions by category
 
-//TODO: Add pagination to get call to prevent too many questions being returned
+// TODO: Add pagination to get call to prevent too many questions being returned
 // *********************** *************************** //

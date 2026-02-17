@@ -1,6 +1,7 @@
 import { useState, type BaseSyntheticEvent } from "react";
 import type { Question } from "../../lib/definitions";
 import "./QuestionCard.css";
+import { IS_DEBUG } from "../../lib/utils";
 
 type CorrectAnswerType = "Answer A" | "Answer B" | "Answer C" | "Answer D";
 
@@ -38,7 +39,7 @@ export default function QuestionCard(props: QuestionCardProps) {
     props.question.CorrectAnswer as CorrectAnswerType
   ) ?? 0;
 
-  console.log("Correct answer is " + props.question.CorrectAnswer + " aka " + correctAnswer);
+  IS_DEBUG && console.log("Correct answer is " + props.question.CorrectAnswer + " aka " + correctAnswer);
 
   const handleAnswerClick = (isCorrectAnswer: boolean, e: BaseSyntheticEvent) => {
     const answerChoiceButton: HTMLButtonElement = e.target;

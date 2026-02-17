@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { SceneDict, type Question } from "../../../lib/definitions";
-import { CHALLENGE_MODE_TIME_LIMIT, getRandomInt } from "../../../lib/utils";
+import { CHALLENGE_MODE_TIME_LIMIT, getRandomInt, IS_DEBUG } from "../../../lib/utils";
 import ChallengeQuestionCard, { type ChallengeQuestionCardProps } from "../../question-card/ChallengeQuestionCard";
 import "./ChallengeMode.css"
 
 
 export type ChallengeModeProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void;
-    setChallengeScore: (score: number) => void
+    setChallengeScore: (score: number) => void;
     questions: Question[];
 };
 
@@ -15,26 +15,26 @@ export default function ChallengeMode(props: ChallengeModeProps) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomInt(0, props.questions.length));
     const [currentScore, setCurrentScore] = useState(0);
     const [additionalPoints, setAdditionalPoints] = useState(0);
-    const [secondsRemaining, setSecondsRemaining] = useState(CHALLENGE_MODE_TIME_LIMIT)
-    const visitedQuestions = useRef(new Set<string>())
+    const [secondsRemaining, setSecondsRemaining] = useState(CHALLENGE_MODE_TIME_LIMIT);
+    const visitedQuestions = useRef(new Set<string>());
 
 
     useEffect(() => {
-        props.setChallengeScore(0)
+        props.setChallengeScore(0);
     }, [])
 
     useEffect(() => {
         if (props.questions.length >= 1) {
             const timeoutId = setTimeout(() => {
                 secondsRemaining > 0 ? setSecondsRemaining(secondsRemaining - 1) : props.handleChangeSceneButtonClick(SceneDict.CHALLENGE_OVER)
-            }, 1000)
+            }, 1000);
             return () => clearTimeout(timeoutId)
         }
     }, [secondsRemaining, props.questions.length])
 
     function getNextQuestIndex(): number {
         if (visitedQuestions.current.size === props.questions.length) {
-            visitedQuestions.current.clear()
+            visitedQuestions.current.clear();
         }
 
         let newQuestionIndex: number | null = null;
@@ -43,10 +43,10 @@ export default function ChallengeMode(props: ChallengeModeProps) {
         while (newQuestionIndex === null) {
             const newIndex = getRandomInt(0, props.questions.length ?? 0)
 
-            console.log("Getting new int: " + newIndex)
+            IS_DEBUG && console.log("Getting new int: " + newIndex);
             if (!visitedQuestions.current.has(props.questions[newIndex].id)) {
-                console.log("Setting new ind: " + newIndex)
-                newQuestionIndex = newIndex
+                IS_DEBUG && console.log("Setting new ind: " + newIndex);
+                newQuestionIndex = newIndex;
             }
         }
         visitedQuestions.current.add(props.questions[newQuestionIndex].id)

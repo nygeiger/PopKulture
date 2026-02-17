@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { SceneDict, type Question, type Team } from "../../../lib/definitions";
-import { getRandomInt, POINTS_TO_WIN } from "../../../lib/utils";
+import { getRandomInt, IS_DEBUG, POINTS_TO_WIN } from "../../../lib/utils";
 import ClassicQuestionCard from "../../question-card/ClassicQuestionCard";
 import "./ClassicMode.css";
 
@@ -43,9 +43,9 @@ export default function ClassicGame(props: ClassicGameProps) {
         while (newQuestionIndex === null) {
             const newIndex = getRandomInt(0, props.questions.length ?? 0)
 
-            console.log("Getting new int: " + newIndex)
+            IS_DEBUG && console.log("Getting new int: " + newIndex)
             if (!visitedQuestions.current.has(props.questions[newIndex].id)) {
-                console.log("Setting new ind: " + newIndex)
+                IS_DEBUG && console.log("Setting new ind: " + newIndex)
                 newQuestionIndex = newIndex
             }
         }

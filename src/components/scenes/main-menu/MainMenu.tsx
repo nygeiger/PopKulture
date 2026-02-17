@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SceneDict } from "../../../lib/definitions";
 import "./MainMenu.css";
+import { IS_DEBUG } from "../../../lib/utils";
 
 type MainMenuProps = {
   handleChangeSceneButtonClick: (newSceneName: string) => void;
@@ -16,7 +17,7 @@ export default function MainMenu(props: MainMenuProps) {
       <div className="titleText">Throwback Trivia. Do you know your stuff?</div>
       {showGameModes ? (
         <div>
-          {import.meta.env.VITE_DEBUG === "1" && <button className="playDevGameMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.DEV_GAME)}>Dev Game</button>}{" "}
+          {IS_DEBUG && <button className="playDevGameMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.DEV_GAME)}>Dev Game</button>}{" "}
           <button className="playClassicMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME_MENU)}>Classic Mode</button>{" "}
           <button className="playChallengeMode" onClick={() => props.handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode</button>
         </div>
