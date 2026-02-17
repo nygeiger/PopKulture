@@ -1,6 +1,6 @@
-import { LOCAL_SERVER_PORT } from "./utils";
+import { VITE_LOCAL_SERVER_PORT } from "./utils";
 
-const SERVER_URL = import.meta.env.VITE_IS_NETLIFY ? `/.netlify/functions/api` : `http://localhost:${LOCAL_SERVER_PORT}`;
+const SERVER_URL = import.meta.env.VITE_IS_NETLIFY ? `/.netlify/functions/api` : `http://localhost:${VITE_LOCAL_SERVER_PORT}`;
 
 //TODO: Look to caching
 export async function getQuestions() {

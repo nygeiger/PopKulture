@@ -6,7 +6,7 @@ html, body {
 }
 
 .titleText {
-    padding-bottom: 50px; /* TODO: remove this line to make this more "global? */
+    padding-bottom: 50px;
 }
 button {
     cursor: pointer;

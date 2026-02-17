@@ -1,11 +1,10 @@
 import express from "express"
 import cors from "cors"
 import * as dotenv from 'dotenv';
-import { LOCAL_SERVER_PORT } from "../lib/utils.ts"
 
 //!: use middleware to wrap requests in appropriate cors authorization
 dotenv.config();
-const { QUESTIONS_URL } = process.env
+const { QUESTIONS_URL, VITE_LOCAL_SERVER_PORT } = process.env
 const app = express()
 app.use(cors())
 
@@ -35,6 +34,6 @@ app.use((err: any, res: any) => {
     }
 });
 
-app.listen(LOCAL_SERVER_PORT, () => {
-    console.log(`Server is running on http://localhost:${LOCAL_SERVER_PORT}`);
+app.listen(VITE_LOCAL_SERVER_PORT, () => {
+    console.log(`Server is running on http://localhost:${VITE_LOCAL_SERVER_PORT}`);
 })
