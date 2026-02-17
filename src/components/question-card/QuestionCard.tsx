@@ -1,6 +1,7 @@
 import { useState, type BaseSyntheticEvent } from "react";
 import type { Question } from "../../lib/definitions";
-import "./QuestionCard.css";
+// import "./QuestionCard.css";
+import qcStyles from "./QuestionCard.module.css"
 import { IS_DEBUG } from "../../lib/utils";
 
 type CorrectAnswerType = "Answer A" | "Answer B" | "Answer C" | "Answer D";
@@ -40,7 +41,7 @@ export default function QuestionCard(props: QuestionCardProps) {
 
   const correctAnswer = letterToIndex(
     question.CorrectAnswer as CorrectAnswerType
-  ) ?? 0;
+  );
 
   IS_DEBUG && console.log("Correct answer is " + question.CorrectAnswer + " aka " + correctAnswer);
 
@@ -49,7 +50,7 @@ export default function QuestionCard(props: QuestionCardProps) {
     if (isCorrectAnswer) {
       setCorrectAnserSelected(true);
     } else {
-      answerChoiceButton.className = answerChoiceButton.className + " incorrect noHover";
+      answerChoiceButton.className = answerChoiceButton.className + " " + qcStyles.incorrect + " noHover";
       answerChoiceButton.disabled = true;
     }
     if (props.handleAnswerClick) props.handleAnswerClick(isCorrectAnswer)
@@ -61,16 +62,16 @@ export default function QuestionCard(props: QuestionCardProps) {
   }
 
   return (
-    <div className={`questionCard ${variant ?? "classic"}Variant`}>
-      <span className="questionSection">{question.Question}</span>
+    <div className={`${qcStyles.questionCard} ${variant === "challenge" ? qcStyles.challengeVariant : qcStyles.classicVariant}`}>
+      <span className={qcStyles.questionSection}>{question.Question}</span>
       {correctAnserSelected ? (
-        <div className="correctAnswerDisplay">
+        <div className={qcStyles.correctAnswerDisplay}>
           <span><b>{`${answers[correctAnswer].replaceAll('*', "")} `}</b><span>Correct Answer!</span></span>
-          <button className="newQuesButton" onClick={() => getNextQuestion()}>Get New Question</button>
+          <button className={qcStyles.newQuesButton} onClick={() => getNextQuestion()}>Get New Question</button>
         </div>
-      ) : (<div className="answerSection">
+      ) : (<div className={qcStyles.answerSection}>
         {answers.map((e, i) => {
-          const elClassName = correctAnswer === i ? "answerElement correct" : "answerElement";
+          const elClassName = correctAnswer === i ? `${qcStyles.answerElement} ${qcStyles.correct}` : qcStyles.answerElement;
           return (<button className={elClassName} key={i} onClick={(e) => handleAnswerClick(i === correctAnswer, e)}>{`${e.replaceAll("*", "")}`}</button>);
         })}
       </div>)}

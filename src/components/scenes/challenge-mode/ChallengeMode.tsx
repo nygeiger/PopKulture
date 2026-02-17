@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { SceneDict, type Question } from "../../../lib/definitions";
 import { CHALLENGE_MODE_TIME_LIMIT, getRandomInt, IS_DEBUG } from "../../../lib/utils";
 import ChallengeQuestionCard, { type ChallengeQuestionCardProps } from "../../question-card/ChallengeQuestionCard";
-import "./ChallengeMode.css"
+import challengeModeStyles from "./ChallengeMode.module.css"
 
 
 export type ChallengeModeProps = {
@@ -12,7 +12,7 @@ export type ChallengeModeProps = {
 };
 
 export default function ChallengeMode(props: ChallengeModeProps) {
-    const {handleChangeSceneButtonClick, setChallengeScore, questions} = props;
+    const { handleChangeSceneButtonClick, setChallengeScore, questions } = props;
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomInt(0, questions.length));
     const [currentScore, setCurrentScore] = useState(0);
@@ -69,16 +69,16 @@ export default function ChallengeMode(props: ChallengeModeProps) {
 
     // TODO: extract Side Labels into it's on component
     return (
-        <div className="challengeMode">
+        <div className={challengeModeStyles.challengeMode}>
             <div className="toMenuButtons">
                 <button className="toMainMenuButton" onClick={() => handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
-                <button style={{height: "1.5rem"}} onClick={() => handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode Menu</button>
+                <button style={{ height: "1.5rem" }} onClick={() => handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode Menu</button>
             </div>
-            <span className="challengeGameHeader">Challenge Mode</span>
+            <span className={challengeModeStyles.challengeGameHeader}>Challenge Mode</span>
             <p>{`Seconds left: ${secondsRemaining}`}</p>
-            <div className="gameSection">
-                <div className="score">
-                    <div className="currentScore"><div>{"Your Score"}</div><div>{additionalPoints ? <>{currentScore}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentScore}</div></div>
+            <div className={challengeModeStyles.gameSection}>
+                <div className={challengeModeStyles.score}>
+                    <div className={challengeModeStyles.currentScore}><div>{"Your Score"}</div><div>{additionalPoints ? <>{currentScore}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentScore}</div></div>
                 </div>
                 <ChallengeQuestionCard {...challengeQuestionCardProps} />
             </div>

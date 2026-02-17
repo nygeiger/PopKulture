@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { SceneDict, type Question, type Team } from "../../../lib/definitions";
 import { getRandomInt, IS_DEBUG, POINTS_TO_WIN } from "../../../lib/utils";
 import ClassicQuestionCard from "../../question-card/ClassicQuestionCard";
-import "./ClassicMode.css";
+import clasModeStyles from "./ClassicMode.module.css";
 
 export type ClassicGameProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void;
@@ -12,7 +12,7 @@ export type ClassicGameProps = {
 }
 
 export default function ClassicGame(props: ClassicGameProps) {
-    const {handleChangeSceneButtonClick, setWinningTeam, questions, teams} = props;
+    const { handleChangeSceneButtonClick, setWinningTeam, questions, teams } = props;
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomInt(0, props.questions.length));
     const [currentTeamIndex, serCurrentTeamIndex] = useState(0);
@@ -67,19 +67,19 @@ export default function ClassicGame(props: ClassicGameProps) {
 
     // TODO: Create new component for teams? HTML may be difficult to read
     return (
-        <div className="classicGame">
+        <div className={clasModeStyles.classicGame}>
             <div className="toMenuButtons">
                 <button onClick={() => handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
                 <button onClick={() => handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME_MENU)}>Classic Mode Menu</button>
             </div>
 
-            <div className="classicGameHeader">Classic Mode</div>
-            <div className="gameSection">
-                <div className="teams">
-                    <div className="currentTeam"><div>{isSoloGame ? "Your Score" : currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
+            <div className={clasModeStyles.classicGameHeader}>Classic Mode</div>
+            <div className={clasModeStyles.gameSection}>
+                <div className={clasModeStyles.teams}>
+                    <div className={clasModeStyles.currentTeam}><div>{isSoloGame ? "Your Score" : currentTeam.name}</div><div>{additionalPoints ? <>{currentTeam.points}<span style={{ color: "green" }}>{` +${additionalPoints}`}</span></> : currentTeam.points}</div></div>
                     <div>
                         {isSoloGame || teams.map((e, i) => {
-                            return i === currentTeamIndex ? "" : (<div className="team" key={e.name}><div>{isSoloGame ? "Your Score" : e.name}</div><div>{e.points}</div></div>)
+                            return i === currentTeamIndex ? "" : (<div className={clasModeStyles.team} key={e.name}><div>{isSoloGame ? "Your Score" : e.name}</div><div>{e.points}</div></div>)
                         })}
                     </div>
                 </div>

@@ -10,7 +10,7 @@ import WinnerScene, { type WinnerSceneProps } from "../scenes/winner-scene/Winne
 import ChallengeMode, { type ChallengeModeProps } from "../scenes/challenge-mode/ChallengeMode";
 import ChallengeOverScene, { type ChallengeOverProps } from "../scenes/challenge-over-scene/ChallengeOver";
 import ChallengeModeMenu from "../scenes/challenge-mode-menu/ChallengeModeMenu";
-import "./GameEngine.css"
+import gmEngStyles from "./GameEngine.module.css"
 
 export default function GameEngine() {
   // TODO: figure out how to enforce currentSceneName coming from SceneDict (should i?)
@@ -60,7 +60,7 @@ export default function GameEngine() {
         const chgoProps: ChallengeOverProps = { ...baseProps, points: challengeScore };
         return chgoProps;
       case SceneDict.WINNER_SCENE:
-        const wsProps: WinnerSceneProps = { ...baseProps, winningTeam: teams[winningTeamIndex], isSoloGame: teams.length <= 1};
+        const wsProps: WinnerSceneProps = { ...baseProps, winningTeam: teams[winningTeamIndex], isSoloGame: teams.length <= 1 };
         return wsProps;
       default:
         return baseProps;
@@ -80,5 +80,5 @@ export default function GameEngine() {
   const currentSceneComponent = sceneComponentMap[currentSceneName] ??
     <MainMenu {...getSceneProps(SceneDict.MAIN_MENU)} />;
 
-  return <div className="gameEngine">{currentSceneComponent}</div>;
+  return <div className={gmEngStyles.gameEngine}>{currentSceneComponent}</div>;
 }
