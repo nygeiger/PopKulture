@@ -1,7 +1,7 @@
 import { useState, type BaseSyntheticEvent } from "react";
 import { SceneDict, type Team } from "../../../lib/definitions";
 import { MAX_TEAMS, POINTS_TO_WIN } from "../../../lib/utils";
-import "./ClassicModeMenu.css"
+import clasMenuStyles from "./ClassicModeMenu.module.css"
 
 const createTeams = (numTeams: number): Team[] => {
     const teamArray: Team[] = []
@@ -31,14 +31,14 @@ export default function ClassicGameMenu(props: ClassicGameMenuProps) {
 
     //TODO: Display points to win via variable while adding necessary commas
     return (
-        <div className="classicGameMenu">
+        <div className={clasMenuStyles.classicGameMenu}>
             <button className="toMainMenuButton toMenuButtons" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
-            <p className="cmmenuTitleText">Get ready for Pop Kulture (Classic Mode) !!</p>
+            <p className={clasMenuStyles.cmmenuTitleText}>Get ready for Pop Kulture (Classic Mode) !!</p>
             <p>{`Reach ${POINTS_TO_WIN.toLocaleString()} points to win`}</p>
-            <div className="cmmMenuText">
+            <div className={clasMenuStyles.cmmMenuText}>
                 <span>How Many teams will be playing?</span><span style={{ paddingLeft: "2px", paddingRight: "2px" }}>-</span><b style={{ paddingRight: "3px", letterSpacing: "-1px" }}>{`${numTeams > 1 ? `${numTeams} Teams` : "Solo Game"}`}</b>
             </div>
-            <select className="teamsSelect" value={numTeams} onChange={handleTeamsChange}>
+            <select className={clasMenuStyles.teamsSelect} value={numTeams} onChange={handleTeamsChange}>
                 {teamOptions}
             </select>
             <div style={{ position: "relative", top: "30px" }}>

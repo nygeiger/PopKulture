@@ -1,5 +1,5 @@
 import { SceneDict } from "../../../lib/definitions";
-import "./ChallengeOver.css"
+import chalOverStyles from "./ChallengeOver.module.css"
 
 export type ChallengeOverProps = {
     handleChangeSceneButtonClick: (newSceneName: string) => void;
@@ -8,7 +8,7 @@ export type ChallengeOverProps = {
 
 export default function ChallengeOverScene(props: ChallengeOverProps) {
     return (
-        <div className="challengeOverScene">
+        <div className={chalOverStyles.challengeOverScene}>
             <button className="toMainMenuButton toMenuButtons" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
             <div style={{ paddingBottom: "10px" }}>Well Done !!</div>
             <div style={{ paddingBottom: "40px" }}><span>You got </span><span style={{ fontWeight: "bold" }}>{props.points.toLocaleString()}</span><span> points</span></div>
