@@ -68,7 +68,7 @@ export default function ClassicGame(props: ClassicGameProps) {
     // TODO: Create new component for teams? HTML may be difficult to read
     return (
         <div className="classicGame">
-            <div className="toMenuButtons" style={{ position: "fixed", top: "3%", left: "3%" }}>
+            <div className="toMenuButtons">
                 <button onClick={() => handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
                 <button onClick={() => handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME_MENU)}>Classic Mode Menu</button>
             </div>

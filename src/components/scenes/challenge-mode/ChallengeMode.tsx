@@ -72,7 +72,7 @@ export default function ChallengeMode(props: ChallengeModeProps) {
         <div className="challengeMode">
             <div className="toMenuButtons">
                 <button className="toMainMenuButton" onClick={() => handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Main Menu</button>
-                <button className="toMainMenuButton" onClick={() => handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode Menu</button>
+                <button style={{height: "1.5rem"}} onClick={() => handleChangeSceneButtonClick(SceneDict.CHALLENGE_GAME_MENU)}>Challenge Mode Menu</button>
             </div>
             <span className="challengeGameHeader">Challenge Mode</span>
             <p>{`Seconds left: ${secondsRemaining}`}</p>

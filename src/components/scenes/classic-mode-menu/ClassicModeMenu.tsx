@@ -32,6 +32,7 @@ export default function ClassicGameMenu(props: ClassicGameMenuProps) {
     //TODO: Display points to win via variable while adding necessary commas
     return (
         <div className="classicGameMenu">
+            <button className="toMainMenuButton toMenuButtons" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
             <p className="cmmenuTitleText">Get ready for Pop Kulture (Classic Mode) !!</p>
             <p>{`Reach ${POINTS_TO_WIN.toLocaleString()} points to win`}</p>
             <div className="cmmMenuText">
@@ -41,7 +42,6 @@ export default function ClassicGameMenu(props: ClassicGameMenuProps) {
                 {teamOptions}
             </select>
             <div style={{ position: "relative", top: "30px" }}>
-                <button className="toMainMenuButton toMenuButtons" onClick={() => props.handleChangeSceneButtonClick(SceneDict.MAIN_MENU)}>Back to Menu</button>
                 <button onClick={() => { props.setTeams(createTeams(numTeams)); props.handleChangeSceneButtonClick(SceneDict.CLASSIC_GAME) }}>PLAY</button>
             </div>
         </div>
