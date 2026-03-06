@@ -1,6 +1,7 @@
 # Pop Kulture
 
->Project Still In Progress !
+>Project Still In Progress
+>>Next Update: Category selection
 
 A trivia app that tests your knowledge on decades worth of pop culture
 
