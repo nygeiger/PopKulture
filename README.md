@@ -40,5 +40,5 @@ So you really know your stuff? Race against time and see how far you can rack up
 This is an idea my father had for an app.
 
 With my prior experience in web development I thought to build it out while also solidifying my web development skills.
-In this stack theres the Front-end (vite, Typescript, React), and a simple Backend server (cors & express), a Database (Google sheets with api calls). Published on Netlify and hooked to my github repo providing CD
+In this stack there's the Front-end (vite, Typescript, React), and a simple Backend server (cors & express), a Database (Google sheets with api calls). Published on Netlify and hooked to my github repo providing CD
 
